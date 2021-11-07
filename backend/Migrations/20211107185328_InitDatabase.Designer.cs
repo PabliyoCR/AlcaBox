@@ -10,7 +10,7 @@ using backend.DataAccess;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211107141856_InitDatabase")]
+    [Migration("20211107185328_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

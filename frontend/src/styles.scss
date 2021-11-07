@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/settings";
+
+html {
+  font-size: toVW(16, 375);
+
+  @include media-breakpoint-up(md) {
+    font-size: toVW(16);
+  }
+
+  @include media-breakpoint-up(xxl) {
+    font-size: 16px;
+  }
+}
