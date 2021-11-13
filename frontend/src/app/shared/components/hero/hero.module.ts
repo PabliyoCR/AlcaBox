@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeroComponent } from './hero.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,8 @@ import { HeroComponent } from './hero.component';
     HeroComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports : [
     HeroComponent

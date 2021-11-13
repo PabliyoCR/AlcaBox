@@ -1,1 +1,10 @@
-<p>hero works!</p>
+<div *ngFor="let route of routes">
+    <a routerLink= "{{route.path}}" routerLinkActive="router-link-active" [innerHTML] = "route.name"></a>
+</div>
+<div>
+    <a routerLink= "login" routerLinkActive="router-link-active">Iniciar Sesión</a>
+</div>
+<div>
+    <a routerLink= "login" routerLinkActive="router-link-active">Cerrar Sesión</a>
+</div>
+<hr>

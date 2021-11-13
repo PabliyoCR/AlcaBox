@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { FooterModule } from './shared/components/footer/footer.module';
 import { HeroModule } from './shared/components/hero/hero.module';
 
+import { HttpClientModule } from '@angular/common/http'
+
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +16,8 @@ import { HeroModule } from './shared/components/hero/hero.module';
     BrowserModule,
     AppRoutingModule,
     HeroModule,
-    FooterModule
+    FooterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
