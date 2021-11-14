@@ -16,7 +16,7 @@ namespace backend.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -219,6 +219,44 @@ namespace backend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("backend.Models.BitacoraAccion", b =>
+                {
+                    b.Property<int>("Accion_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Accion")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Usuarios")
+                        .HasColumnType("text");
+
+                    b.HasKey("Accion_Id");
+
+                    b.HasIndex("Usuarios");
+
+                    b.ToTable("BitacoraAccion");
+                });
+
+            modelBuilder.Entity("backend.Models.Estado", b =>
+                {
+                    b.Property<int>("Estado_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
+                    b.HasKey("Estado_Id");
+
+                    b.ToTable("Estado");
+                });
+
             modelBuilder.Entity("backend.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -287,6 +325,15 @@ namespace backend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.BitacoraAccion", b =>
+                {
+                    b.HasOne("backend.Models.ApplicationUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("Usuarios");
+
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

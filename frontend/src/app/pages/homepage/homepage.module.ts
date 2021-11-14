@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './homepage.component';
+
 
 
 @NgModule({
@@ -10,8 +9,7 @@ import { HomepageComponent } from './homepage.component';
     HomepageComponent
   ],
   imports: [
-    CommonModule,
-    HomepageRoutingModule
+    CommonModule
   ]
 })
 export class HomepageModule { }

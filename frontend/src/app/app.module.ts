@@ -6,20 +6,27 @@ import { AppComponent } from './app.component';
 import { FooterModule } from './shared/components/footer/footer.module';
 import { HeroModule } from './shared/components/hero/hero.module';
 
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AuthInterceptor } from './shared/guards/AuthInterceptor';
+import { UsuarioService } from './shared/services/usuario.service';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
+  imports: [BrowserModule,
     AppRoutingModule,
     HeroModule,
     FooterModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UsuarioService,{
+    provide:HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

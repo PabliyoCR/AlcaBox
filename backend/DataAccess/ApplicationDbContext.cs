@@ -17,6 +17,10 @@ namespace backend.DataAccess
 
         public DbSet<ApplicationUser> ApplicationsUser { get; set; }
 
+        public DbSet<BitacoraAccion> BitacoraAccion { get; set; }
+
+        public DbSet<Estado> Estado { get; set; }
+
 
     }
 }
