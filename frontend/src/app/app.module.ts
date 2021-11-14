@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthInterceptor } from './shared/guards/AuthInterceptor';
-import { UsuarioService } from './shared/services/usuario.service';
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +20,11 @@ import { UsuarioService } from './shared/services/usuario.service';
     AppRoutingModule,
     HeroModule,
     FooterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [UsuarioService,{
+  providers: [UserService,{
     provide:HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi:true

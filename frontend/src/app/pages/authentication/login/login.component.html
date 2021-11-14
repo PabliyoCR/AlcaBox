@@ -1,5 +1,7 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-    <input type="text" placeholder="username" formControlName="username">
-    <input type="password" placeholder="password" formControlName="password">
+<form (submit)="login($event)">
+    <input type="text" class="form-control border-3 loginInput" id="email" name="email"
+              placeholder="email" formControlName="email" />
+     <input type="text" class="form-control border-3 loginInput" id="password" name="password"
+              placeholder="password" formControlName="password" />
     <button type="submit">Iniciar Sesión</button>
 </form>

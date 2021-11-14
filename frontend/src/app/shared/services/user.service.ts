@@ -1,28 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { IPerfilUsuaio } from '../models/IPerfilUsuaio.model';
 import { Usuario } from '../models/Usuario.model';
+import jwt_decode from "jwt-decode";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UserService {
 
-   //Url del servidor
+    //Url del servidor
   private urlApp: string;
   //Url servicio
   private urlAPI: string;
   //public list: Usuarios[];
+  
   private _refres$ = new Subject<void>();
   private actualizarFormulario = new BehaviorSubject<Usuario>({} as any);
 
   constructor(private http: HttpClient) {
-    this.urlApp = 'https://localhost:44326/';
-    this.urlAPI = 'api/Usuario';
+    this.urlApp = 'https://localhost:44314/';
+    this.urlAPI = 'api';
   }
 
   login(formData:any) {
-    return this.http.post(this.urlApp + this.urlAPI + "/login", formData);
+    console.log(this.urlApp + this.urlAPI + "/auth/login", formData);
+    return this.http.post(this.urlApp + this.urlAPI + "/auth/login", formData);
   }
 
   guardarUsuario(usuario: Usuario): Observable<Usuario> {
@@ -103,7 +108,7 @@ export class UsuarioService {
   } */
 
 
-  /* public cargarPerfilUsuario():IPerfilUsuaio{
+  public cargarPerfilUsuario(): IPerfilUsuaio{
 
     let token = localStorage.getItem("token");
 
@@ -111,5 +116,5 @@ export class UsuarioService {
     let perfilU : IPerfilUsuaio = decoded;
 
     return perfilU
-  } */
+  }
 }

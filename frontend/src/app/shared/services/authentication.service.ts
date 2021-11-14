@@ -7,14 +7,17 @@ import { map } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
+ baseUrl = 'https://localhost:44314/api'
+
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'https://localhost:44314/api'
+ 
 
   login(userName : string, password: string) 
   {
+    
 
-  let headers = new HttpHeaders();
+  /* let headers = new HttpHeaders();
   headers.append('Content-Type', 'application/json');
 
   return this.http.post(
@@ -24,7 +27,7 @@ export class AuthenticationService {
           res.json()
         })).subscribe(result => {
           console.log(result);
-        })
+        }) */
 
 
        /*  .map((res : any) => res.json())
