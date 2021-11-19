@@ -34,6 +34,8 @@ namespace backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Mapeo Entidades
+            services.AddAutoMapper(typeof(Startup));
 
             // Conexion con la Base de datos
             services.AddDbContext<ApplicationDbContext>(options => {
@@ -48,6 +50,12 @@ namespace backend
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddCors(options => {
+                options.AddDefaultPolicy(builder => {
+                    builder.WithOrigins(Configuration["ConfiguracionJWT:Client_URL"].ToString()).AllowAnyMethod().AllowAnyHeader();
+                });
+            });
 
             services.AddAuthentication(auth =>
             {
@@ -87,14 +95,11 @@ namespace backend
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "backend v1"));
             }
 
-            app.UseCors(builder =>
-                builder.WithOrigins(Configuration["ConfiguracionJWT:Client_URL"].ToString())
-                .AllowAnyHeader()
-                .AllowAnyMethod());
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

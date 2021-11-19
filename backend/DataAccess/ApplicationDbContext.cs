@@ -21,6 +21,8 @@ namespace backend.DataAccess
 
         public DbSet<Estado> Estado { get; set; }
 
+        public DbSet<backend.Models.Paquete> Paquete { get; set; }
+
 
     }
 }
