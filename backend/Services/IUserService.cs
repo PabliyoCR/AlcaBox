@@ -33,6 +33,7 @@ namespace backend.Services
         private UserManager<IdentityUser> _userManger;
         private IConfiguration _configuration;
         private IMailService _mailService;
+
         public UserService(UserManager<IdentityUser> userManager, IConfiguration configuration, IMailService mailService)
         {
             _userManger = userManager;
@@ -123,7 +124,7 @@ namespace backend.Services
                 issuer: _configuration["AuthSettings:Issuer"],
                 audience: _configuration["AuthSettings:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddDays(30),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
 
             string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);

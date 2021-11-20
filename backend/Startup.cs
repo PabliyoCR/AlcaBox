@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace backend
     {
         public Startup(IConfiguration configuration)
         {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             Configuration = configuration;
         }
 
@@ -51,12 +53,7 @@ namespace backend
             }).AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddCors(options => {
-                options.AddDefaultPolicy(builder => {
-                    builder.WithOrigins(Configuration["ConfiguracionJWT:Client_URL"].ToString()).AllowAnyMethod().AllowAnyHeader();
-                });
-            });
-
+            //Autenticacion de usuarios
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -67,12 +64,26 @@ namespace backend
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
+                    ValidateLifetime = true,
                     ValidAudience = Configuration["AuthSettings:Audience"],
                     ValidIssuer = Configuration["AuthSettings:Issuer"],
                     RequireExpirationTime = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"])),
-                    ValidateIssuerSigningKey = true
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"]))
                 };
+            });
+
+            //Autorizacion de usuarios
+            services.AddAuthorization(options => {
+                options.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
+            });
+
+            //Permisos CORS
+            services.AddCors(options => {
+                options.AddDefaultPolicy(builder => {
+                    builder.WithOrigins(Configuration["ConfiguracionJWT:Client_URL"].ToString()).AllowAnyMethod().AllowAnyHeader();
+                });
             });
 
             services.AddScoped<IUserService, UserService>();
