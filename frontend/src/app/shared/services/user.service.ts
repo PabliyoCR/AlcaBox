@@ -1,52 +1,74 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { IPerfilUsuaio } from '../models/IPerfilUsuaio.model';
-import { Usuario } from '../models/Usuario.model';
+import { IPerfilUsuaio } from '../models/authenticationDTOs/IPerfilUsuaio.model';
+import { UserDTO } from '../models/authenticationDTOs/CredencialesDTO.model';
 import jwt_decode from "jwt-decode";
+import { environment } from 'src/environments/environment';
+import { AuthenticationResponse } from '../models/authenticationDTOs/security';
+import { IAutentificacion } from '../models/authenticationDTOs/IAutentificacion.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
 
-    //Url del servidor
-  private urlApp: string;
-  //Url servicio
-  private urlAPI: string;
-  //public list: Usuarios[];
-  
+export class UserService {
   private _refres$ = new Subject<void>();
-  private actualizarFormulario = new BehaviorSubject<Usuario>({} as any);
+  private actualizarFormulario = new BehaviorSubject<UserDTO>({} as any);
+  urlAPI = environment.urlAPI
+  private readonly keyToken = 'token';
+  private readonly roleField = 'role';
 
   constructor(private http: HttpClient) {
-    this.urlApp = 'https://localhost:44314/';
-    this.urlAPI = 'api';
   }
 
-  login(formData:any) {
-    console.log(this.urlApp + this.urlAPI + "/auth/login", formData);
-    return this.http.post(this.urlApp + this.urlAPI + "/auth/login", formData);
+  login(usuario:IAutentificacion) : Observable<AuthenticationResponse> {
+    return this.http.post<AuthenticationResponse>(this.urlAPI + "/auth/login", usuario);
   }
 
-  guardarUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.urlApp + this.urlAPI, usuario);
+  guardarUsuario(usuario: UserDTO): Observable<AuthenticationResponse> {
+    return this.http.post<AuthenticationResponse>(this.urlAPI+ "/auth/register", usuario);
   }
 
-  obtenerUsuario(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(this.urlApp + this.urlAPI + id);
+  isLogIn(){
+    const token = localStorage.getItem(this.keyToken);
+
+    if (!token){
+      return false;
+    }
+
+    return true;
   }
 
-  actualizarUsuario(id:string, usuario:Usuario) :Observable<Usuario>{
-    return this.http.put<Usuario>(this.urlApp + this.urlAPI + '/' + id, usuario);
+  logOut(){
+    localStorage.removeItem(this.keyToken);
   }
 
-  actualizar(usuario: Usuario){
+  getRole(): string {
+    return this.getFieldJWT(this.roleField);
+  }
+
+  getFieldJWT(field: string): string{
+    const token = localStorage.getItem(this.keyToken);
+    if (!token){return '';}
+    var dataToken = JSON.parse(atob(token.split('.')[1]));
+    return dataToken[field];
+  }
+
+  obtenerUsuario(id: string): Observable<UserDTO> {
+    return this.http.get<UserDTO>(this.urlAPI + id);
+  }
+
+  actualizarUsuario(id:string, usuario:UserDTO) :Observable<UserDTO>{
+    return this.http.put<UserDTO>(this.urlAPI + '/' + id, usuario);
+  }
+
+  actualizar(usuario: UserDTO){
     this.actualizarFormulario.next(usuario);
   }
 
-  obtenerUsuarios$():Observable<Usuario>{
+  obtenerUsuarios$():Observable<UserDTO>{
     return this.actualizarFormulario.asObservable();
   // ===================================     MAIKOL    ==========================
   }

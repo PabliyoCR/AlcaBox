@@ -12,13 +12,13 @@
 
 
 
-@function toVW($inPX: null, $screen: 1440) {
+@function toVW($inPX: null, $screen: 1920) {
   $inVW: $inPX / $screen * 100;
   $val: #{$inVW}vw;
   @return $val;
 }
 
-@function toVH($inPX: null, $screen: 1208) {
+@function toVH($inPX: null, $screen: 1080) {
   $inVW: $inPX / $screen * 100;
   $val: #{$inVW}vh;
   @return $val;
@@ -36,18 +36,7 @@
   $inVW: math.div($inPX, $fontbase);
   $val: #{$inVW}rem;
   @return $val;
-}
-
-@function toLetterSpacing($inLetterSpacing: null, $inFontSize: null) {
-  $val: math.div($inLetterSpacing * $inFontSize, 1000);
-  @return toREM($val);
-}
-
-@function toLetterSpacingMobile($inLetterSpacing: null, $inFontSize: null) {
-  $val: math.div($inLetterSpacing * $inFontSize, 1000);
-  @return toREMMobile($val);
-}
-
+} 
 
 
 //svg icon utils

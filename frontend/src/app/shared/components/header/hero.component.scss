@@ -1,0 +1,35 @@
+@import "src/assets/scss/custom";
+
+:host{
+    min-height: toREM(275);
+    color: $white;
+    background: linear-gradient(180deg, $secondary 0%, rgba(0,0,0,0) 66% ,rgba(0,0,0,0) 100%);
+}
+
+.hero{
+    &__background{
+        &__image{
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            width: 100%;
+            height: toREM(275);
+            background: url('./../../../../assets/images/global/freighter.jpg') no-repeat center center;
+            background-size: 100%;
+            -webkit-clip-path: url(#hero-clip);
+            clip-path: url(#hero-clip);
+        }
+    }
+
+    &__links{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        font-weight: bolder;
+
+        &__link{
+            margin-right: toREM(30);
+            text-shadow: 2px 2px $dark;
+        }
+    }
+}

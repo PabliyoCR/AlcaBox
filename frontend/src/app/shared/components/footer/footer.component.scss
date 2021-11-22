@@ -1,0 +1,24 @@
+@import "src/assets/scss/custom";
+
+:host{
+    min-height: toREM(275);
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0) 33%, $secondary 100%);
+    position: relative;
+}
+
+.footer{
+    &__background{
+        &__image{
+            position: absolute;
+            z-index: -1;
+            bottom: 0;
+            width: 100%;
+            height: toREM(275);
+            background: url('./../../../../assets/images/global/freighter.jpg') no-repeat center center;
+            background-size: 100%;
+            background-position-y: toREM(-700);
+            -webkit-clip-path: url(#footer-clip);
+            clip-path: url(#footer-clip);
+        }
+    }
+}

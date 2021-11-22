@@ -1,7 +1,15 @@
-<form (submit)="login($event)">
-    <input type="text" class="form-control border-3 loginInput" id="email" name="email"
-              placeholder="email" formControlName="email" />
-     <input type="text" class="form-control border-3 loginInput" id="password" name="password"
-              placeholder="password" formControlName="password" />
-    <button type="submit">Iniciar Sesión</button>
-</form>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 text-end mx-auto">
+                <form (submit)="login($event)">
+                    <input type="text" class="form-control border-3 my-3" id="email" name="email"
+                    placeholder="email" formControlName="email" />
+                    <input type="password" class="form-control border-3 my-3" id="password" name="password"
+                    placeholder="password" formControlName="password" />
+                    <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+</section>

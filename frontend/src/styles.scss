@@ -11,3 +11,18 @@ html {
     font-size: 16px;
   }
 }
+
+
+a {
+  color: inherit;
+}
+
+// Buttons
+.btn {
+  border-radius: 0 toREM(50);
+}
+
+// Section
+section{
+  padding: toREM(50) 0;
+}

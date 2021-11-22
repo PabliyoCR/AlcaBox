@@ -1,0 +1,19 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 text-end mx-auto">
+                <form (submit)="signup($event)">
+                    <input type="text" class="form-control border-3 my-3" id="email" name="email"
+                    placeholder="Email" formControlName="email" />
+                     <input type="name" class="form-control border-3 my-3" id="name" name="name"
+                    placeholder="Nombre" formControlName="name" />
+                    <input type="password" class="form-control border-3 my-3" id="password" name="password"
+                    placeholder="Contraseña" formControlName="password" />
+                    <input type="password" class="form-control border-3 my-3" id="confirm_password" name="confirm_password"
+                    placeholder="Confirmar Contraseña" formControlName="confirm_password" />
+                    <button class="btn btn-primary" type="submit">Registrarse</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+</section>

@@ -6,7 +6,7 @@ $gray-100: #F4F4F4;
 // $gray-200: #e9ecef;
 // $gray-300: #dee2e6;
 // $gray-400: #ced4da;
-$gray-500: #757575;
+$gray-500: #707070;
 // $gray-600: #6c757d;
 // $gray-700: #495057;
 // $gray-800: #343a40;
@@ -16,7 +16,9 @@ $black: #000;
 
 // // fusv-disable
 // // scss-docs-start gray-colors-map
-$grays: ("100": $gray-100,
+
+$grays: () !default;
+$grays: map-merge(("100": $gray-100,
   // "200": $gray-200,
   // "300": $gray-300,
   // "400": $gray-400,
@@ -25,44 +27,47 @@ $grays: ("100": $gray-100,
   // "700": $gray-700,
   // "800": $gray-800,
   // "900": $gray-900
-);
+), $grays);
 // // scss-docs-end gray-colors-map
 // // fusv-enable
 
 // // scss-docs-start color-variables
-// $blue:    #0d6efd;
+$blue: #304385;
+$dark-blue:    #305C7A;
 // $indigo:  #6610f2;
 // $purple:  #6f42c1;
-$pink: #FF91A3;
-$red: #FF0000;
-// $orange:  #fd7e14;
+//$pink: #FF91A3;
+$red: #B33917;
+$orange:  #E67B3E;
 // $yellow:  #ffc107;
-$green: #ACCC45;
+//$green: #ACCC45;
 // $teal:    #20c997;
-$cyan: #30A9E0;
+//$cyan: #30A9E0;
 // // scss-docs-end color-variables
 
 // // scss-docs-start colors-map
-$colors: ( // "blue":       $blue,
+$colors: () !default;
+$colors: map-merge(( // 
+  "blue":       $blue,
   // "indigo":     $indigo,
   // "purple":     $purple,
-  "pink": $pink,
-  "red": $red,
-  // "orange":     $orange,
+  //"pink": $pink,
+  //"red": $red,
+  "orange":     $orange,
   // "yellow":     $yellow,
-  "green": $green,
+  //"green": $green,
   // "teal":       $teal,
-  "cyan": $cyan,
+  //"cyan": $cyan,
   "white": $white,
   "gray": $gray-100,
   // "gray-dark":  $gray-800
-);
+), $colors);
 // // scss-docs-end colors-map
 
 // // scss-docs-start theme-color-variables
-$primary: $green;
-$secondary: $pink;
-$tertiary: $cyan;
+$primary: $blue;
+$secondary: $dark-blue;
+$tertiary: $orange;
 // $success:       $green;
 // $info:          $cyan;
 // $warning:       $yellow;
@@ -72,7 +77,8 @@ $dark: $black;
 // // scss-docs-end theme-color-variables
 
 // // scss-docs-start theme-colors-map
-$theme-colors: ("primary": $primary,
+$theme-colors: (
+  "primary": $primary,
   "secondary": $secondary,
   "tertiary": $tertiary,
   // "success":    $success,
