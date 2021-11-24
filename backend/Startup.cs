@@ -76,7 +76,9 @@ namespace backend
 
             //Autorizacion de usuarios
             services.AddAuthorization(options => {
-                options.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
+                options.AddPolicy("EsAdmin", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("EsFuncionario", policy => policy.RequireRole("Funcionario"));
+                options.AddPolicy("EsUsuario", policy => policy.RequireRole("Usuario"));
             });
 
             //Permisos CORS

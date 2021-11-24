@@ -9,36 +9,17 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class HeroComponent implements OnInit {
 
-  routes = [
-    {
-      'name': 'inicio',
-      'path' : ''
-    },
-    {
-      'name': 'paqueteria',
-      'path' : 'packages'
-    },
-    {
-      'name': 'reportes',
-      'path' : 'reports'
-    },
-    {
-      'name': 'acerca de',
-      'path' : 'about'
-    },
-    {
-      'name': 'ayuda',
-      'path' : 'help'
-    }
-  ]
-
   constructor(public router : Router, private UserService : UserService) { }
 
   ngOnInit(): void {
   }
 
   isAuthenticated(): boolean {
-    return this.UserService.isLogIn();
+    return this.UserService.isAuthenticated();
+  }
+
+  isAuthorizated(roles : string[]){
+    return this.UserService.isAuthorizated(roles);
   }
 
   logOut(){

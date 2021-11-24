@@ -5,9 +5,10 @@ import { LoginComponent } from './pages/authentication/login/login.component';
 import { SignupComponent } from './pages/authentication/signup/signup.component';
 import { HelpComponent } from './pages/help/help.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { MaintenanceComponent } from './pages/maintenance/maintenance.component';
 import { PackagesComponent } from './pages/packages/packages.component';
 import { ReportsComponent } from './pages/reports/reports.component';
-import { AuthenticationGuard } from './shared/guards/authentication.guard';
+import { AdminAuthorizationGuard, AuthenticationGuard, FouncionarioAuthorizationGuard, UsuarioAuthorizationGuard } from './shared/guards/authentication.guard';
 
 const routes: Routes = [
  /*  {
@@ -29,12 +30,17 @@ const routes: Routes = [
   {
     path : 'packages',
     component : PackagesComponent,
-    canActivate:[AuthenticationGuard]
+    canActivate:[AuthenticationGuard, UsuarioAuthorizationGuard]
   },
   {
     path : 'reports',
     component : ReportsComponent,
-    canActivate:[AuthenticationGuard]
+    canActivate:[AuthenticationGuard, FouncionarioAuthorizationGuard]
+  },
+   {
+    path : 'maintenance',
+    component : MaintenanceComponent,
+    canActivate:[AuthenticationGuard, AdminAuthorizationGuard]
   },
   {
     path : 'about',

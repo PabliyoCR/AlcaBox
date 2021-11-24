@@ -112,10 +112,14 @@ namespace backend.Services
                     IsSuccess = false,
                 };
 
+            var role = await _userManger.GetRolesAsync(user);
+            IdentityOptions _options = new IdentityOptions();
+
             var claims = new[]
             {
                 new Claim("Email", model.Email),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim("Role", role.FirstOrDefault())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));

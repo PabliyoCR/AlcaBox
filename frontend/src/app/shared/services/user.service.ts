@@ -18,7 +18,6 @@ export class UserService {
   private actualizarFormulario = new BehaviorSubject<UserDTO>({} as any);
   urlAPI = environment.urlAPI
   private readonly keyToken = 'token';
-  private readonly roleField = 'role';
 
   constructor(private http: HttpClient) {
   }
@@ -31,7 +30,7 @@ export class UserService {
     return this.http.post<AuthenticationResponse>(this.urlAPI+ "/auth/register", usuario);
   }
 
-  isLogIn(){
+  isAuthenticated(){
     const token = localStorage.getItem(this.keyToken);
 
     if (!token){
@@ -41,12 +40,19 @@ export class UserService {
     return true;
   }
 
+   isAuthorizated(roles : string[]){
+    if(!roles.includes(this.getFieldJWT('Role'))){
+      return false
+    }
+    return true;
+  }
+
   logOut(){
     localStorage.removeItem(this.keyToken);
   }
 
   getRole(): string {
-    return this.getFieldJWT(this.roleField);
+    return this.getFieldJWT('Role');
   }
 
   getFieldJWT(field: string): string{
