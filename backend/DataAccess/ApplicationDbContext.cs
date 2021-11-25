@@ -20,9 +20,11 @@ namespace backend.DataAccess
 
         public DbSet<BitacoraAccion> BitacoraAccion { get; set; }
 
+        public DbSet<Paquete> Paquete { get; set; }
+
         public DbSet<Estado> Estado { get; set; }
 
-        public DbSet<backend.Models.Paquete> Paquete { get; set; }
+        public DbSet<Arancel> Arancel { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,15 +34,18 @@ namespace backend.DataAccess
             this.SeedUsers(modelBuilder);
             this.SeedRoles(modelBuilder);
             this.SeedUserRoles(modelBuilder);
+            this.SeedEstados(modelBuilder);
+            this.SeedAranceles(modelBuilder);
         }
 
         private string idAdmin = Guid.NewGuid().ToString();
         private string idFuncionario = Guid.NewGuid().ToString();
         private string idUsuario = Guid.NewGuid().ToString();
 
+        // Pregarga de usuarios
         private void SeedUsers(ModelBuilder modelBuilder)
         {
-            // ADMIN
+            // Usuario Admin
             ApplicationUser adminUser = new ApplicationUser()
             {
                 Id = idAdmin,
@@ -50,8 +55,8 @@ namespace backend.DataAccess
             };
             PasswordHasher<ApplicationUser> adminPH = new PasswordHasher<ApplicationUser>();
             adminUser.PasswordHash = adminPH.HashPassword(adminUser, "2021Proyecto.");
-            
-            // FUNCIONARIO
+
+            // Usuario Funcionario
             ApplicationUser funcionarioUser = new ApplicationUser()
             {
                 Id = idFuncionario,
@@ -62,7 +67,7 @@ namespace backend.DataAccess
             PasswordHasher<ApplicationUser> funcionarioPH = new PasswordHasher<ApplicationUser>();
             funcionarioUser.PasswordHash = funcionarioPH.HashPassword(funcionarioUser, "2021Proyecto.");
 
-            // USUARIO
+            // Usuario
             ApplicationUser user = new ApplicationUser()
             {
                 Id = idUsuario,
@@ -76,6 +81,8 @@ namespace backend.DataAccess
             modelBuilder.Entity<ApplicationUser>().HasData(adminUser, funcionarioUser, user);
         }
 
+
+        // Precarga de Roles
         private string idAdminRole = Guid.NewGuid().ToString();
         private string idFuncionarioRole = Guid.NewGuid().ToString();
         private string idUsuarioRole = Guid.NewGuid().ToString();
@@ -89,12 +96,38 @@ namespace backend.DataAccess
                 );
         }
 
+        // Asignacion de Usuario precargados a Roles precargados
         private void SeedUserRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string>() { RoleId = idAdminRole, UserId = idAdmin },
                     new IdentityUserRole<string>() { RoleId = idFuncionarioRole, UserId = idFuncionario },
                     new IdentityUserRole<string>() { RoleId = idUsuarioRole, UserId = idUsuario }
+                );
+        }
+
+        // Precarga de Estados
+        private void SeedEstados(ModelBuilder builder)
+        {
+            builder.Entity<Estado>().HasData(
+                   new Estado() { Estado_Id = 1, Nombre = "En espera a Courier" },
+                    new Estado() { Estado_Id = 2, Nombre = "Recibido en Courier" },
+                    new Estado() { Estado_Id = 3, Nombre = "En Tránsito a CR" },
+                    new Estado() { Estado_Id = 4, Nombre = "En vuelo" },
+                    new Estado() { Estado_Id = 5, Nombre = "Recibido en Aduanas" },
+                    new Estado() { Estado_Id = 6, Nombre = "En trámite Aduanal" },
+                    new Estado() { Estado_Id = 7, Nombre = "En proceso de Entrega" },
+                    new Estado() { Estado_Id = 8, Nombre = "Entregado" },
+                    new Estado() { Estado_Id = 9, Nombre = "Finalizado" }
+                );
+        }
+
+        // Precarga de Aranceles
+        private void SeedAranceles(ModelBuilder builder)
+        {
+            builder.Entity<Arancel>().HasData(
+                   new Arancel() { Arancel_Id = 1, Nombre = "Arancel_1" },
+                   new Arancel() { Arancel_Id = 2, Nombre = "Arancel_2" }
                 );
         }
     }

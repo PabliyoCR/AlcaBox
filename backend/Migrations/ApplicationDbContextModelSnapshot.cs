@@ -47,21 +47,21 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "561d0cb1-5b93-401c-b465-6011c3bef6b9",
+                            Id = "58b590e6-deb5-457e-8a56-75a278186b43",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "953ecffe-3889-4c70-9200-aa4af3e8ad0f",
+                            Id = "263f897b-d27e-4a0f-8799-e05a99d805c9",
                             ConcurrencyStamp = "2",
                             Name = "Funcionario",
                             NormalizedName = "Funcionario"
                         },
                         new
                         {
-                            Id = "e812d859-a09f-4f6e-96d0-ea3a8b28f21a",
+                            Id = "198a2ca1-6bcf-4d08-9488-08f4a20e5510",
                             ConcurrencyStamp = "3",
                             Name = "Usuario",
                             NormalizedName = "Usuario"
@@ -225,18 +225,18 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "f92d6735-5a1f-460d-a542-230a2c920247",
-                            RoleId = "561d0cb1-5b93-401c-b465-6011c3bef6b9"
+                            UserId = "6c08929c-5b34-4347-9c1c-5e5edadd7802",
+                            RoleId = "58b590e6-deb5-457e-8a56-75a278186b43"
                         },
                         new
                         {
-                            UserId = "0e19ee5d-12c5-4db8-97ea-79364552dc52",
-                            RoleId = "953ecffe-3889-4c70-9200-aa4af3e8ad0f"
+                            UserId = "e6831f22-4f71-43a4-8579-78bf21e9ae51",
+                            RoleId = "263f897b-d27e-4a0f-8799-e05a99d805c9"
                         },
                         new
                         {
-                            UserId = "e463086e-f4f3-4cef-ab22-d0a893f66f55",
-                            RoleId = "e812d859-a09f-4f6e-96d0-ea3a8b28f21a"
+                            UserId = "ec3c3873-dc40-49bc-89e6-1da64ce7c2e3",
+                            RoleId = "198a2ca1-6bcf-4d08-9488-08f4a20e5510"
                         });
                 });
 
@@ -272,6 +272,18 @@ namespace backend.Migrations
                     b.HasKey("Arancel_Id");
 
                     b.ToTable("Arancel");
+
+                    b.HasData(
+                        new
+                        {
+                            Arancel_Id = 1,
+                            Nombre = "Arancel_1"
+                        },
+                        new
+                        {
+                            Arancel_Id = 2,
+                            Nombre = "Arancel_2"
+                        });
                 });
 
             modelBuilder.Entity("backend.Models.BitacoraAccion", b =>
@@ -310,6 +322,53 @@ namespace backend.Migrations
                     b.HasKey("Estado_Id");
 
                     b.ToTable("Estado");
+
+                    b.HasData(
+                        new
+                        {
+                            Estado_Id = 1,
+                            Nombre = "En espera a Courier"
+                        },
+                        new
+                        {
+                            Estado_Id = 2,
+                            Nombre = "Recibido en Courier"
+                        },
+                        new
+                        {
+                            Estado_Id = 3,
+                            Nombre = "En Tránsito a CR"
+                        },
+                        new
+                        {
+                            Estado_Id = 4,
+                            Nombre = "En vuelo"
+                        },
+                        new
+                        {
+                            Estado_Id = 5,
+                            Nombre = "Recibido en Aduanas"
+                        },
+                        new
+                        {
+                            Estado_Id = 6,
+                            Nombre = "En trámite Aduanal"
+                        },
+                        new
+                        {
+                            Estado_Id = 7,
+                            Nombre = "En proceso de Entrega"
+                        },
+                        new
+                        {
+                            Estado_Id = 8,
+                            Nombre = "Entregado"
+                        },
+                        new
+                        {
+                            Estado_Id = 9,
+                            Nombre = "Finalizado"
+                        });
                 });
 
             modelBuilder.Entity("backend.Models.Paquete", b =>
@@ -319,13 +378,13 @@ namespace backend.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("Aranceles")
+                    b.Property<int?>("Aranceles")
                         .HasColumnType("integer");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
 
-                    b.Property<int>("Estado_id")
+                    b.Property<int?>("Estados")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -341,14 +400,13 @@ namespace backend.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Usuarios")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Paquete_Id");
 
                     b.HasIndex("Aranceles");
 
-                    b.HasIndex("Estado_id");
+                    b.HasIndex("Estados");
 
                     b.HasIndex("Usuarios");
 
@@ -395,16 +453,16 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f92d6735-5a1f-460d-a542-230a2c920247",
+                            Id = "6c08929c-5b34-4347-9c1c-5e5edadd7802",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b1a88ae2-2293-464e-a2c5-41fc4813bd20",
+                            ConcurrencyStamp = "dc08a525-0182-44e7-aaa7-57212dec50b4",
                             Email = "admin@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMlHMyXh228p88/x60H0oYLIIiCCjskKt7y1Giml/YvYMArN/KV+gWTo0w4PfpZcig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG30+UfkKaRnN0Z+dVej4MYant/80F06OZzVzbXR9EkVp01hXq3iTpyNgw0qh8LXJg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "842d89ba-be84-49cf-b77e-3466de3f8437",
+                            SecurityStamp = "7cbab6fc-669e-45c0-a22b-2bfa7c7c15d7",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             Acepta_Terminos = false,
@@ -412,16 +470,16 @@ namespace backend.Migrations
                         },
                         new
                         {
-                            Id = "0e19ee5d-12c5-4db8-97ea-79364552dc52",
+                            Id = "e6831f22-4f71-43a4-8579-78bf21e9ae51",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c39ba87b-93c3-422d-83a1-a4ae413d736d",
+                            ConcurrencyStamp = "d6b4b05f-d86f-4263-80e7-5649ec10c2e5",
                             Email = "billy@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BILLY@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE3GB0lPuKByiD7Rh33ljyVqwOUvR/sEbxP8YhKLbUuqHueLdB4qOZ22I9YffMA4Yw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHTeZhLm8IQlKczGA68ctbJHSLUh9P1BMpU15U8uslR/HwPuqmw9FGGfmAVPTZEvlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2b796b8c-d2a8-4fd0-9cee-c2da2e779f47",
+                            SecurityStamp = "81979d10-aa95-4435-9687-b49e98d77183",
                             TwoFactorEnabled = false,
                             UserName = "Billy",
                             Acepta_Terminos = false,
@@ -429,16 +487,16 @@ namespace backend.Migrations
                         },
                         new
                         {
-                            Id = "e463086e-f4f3-4cef-ab22-d0a893f66f55",
+                            Id = "ec3c3873-dc40-49bc-89e6-1da64ce7c2e3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0c3d9cfa-9e57-478f-98d0-ff8997fb3a8e",
+                            ConcurrencyStamp = "53c21db8-de06-4ed0-8b2a-4c1a9cbacabd",
                             Email = "pablo@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "PABLO@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC3w/qrM0N/uyp0rt6L+QbpAadrjKfFUeLfOuP8KnIMhbG3gZTASEH4pm0SoyrECvg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGE1+FQAVTidS2HEa18N6a9VN9WOWlgupiFfUbbfVBjRc+ZfzTz4CbFLjR6mfogo0A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3fd31634-3c9f-472f-afad-84feaa85c0c2",
+                            SecurityStamp = "79c5d0ca-66bc-4e7e-91d7-1afda95c6616",
                             TwoFactorEnabled = false,
                             UserName = "Pablo",
                             Acepta_Terminos = false,
@@ -510,21 +568,15 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Models.Arancel", "Arancel")
                         .WithMany()
-                        .HasForeignKey("Aranceles")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Aranceles");
 
                     b.HasOne("backend.Models.Estado", "Estado")
                         .WithMany()
-                        .HasForeignKey("Estado_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Estados");
 
                     b.HasOne("backend.Models.ApplicationUser", "Usuario")
                         .WithMany()
-                        .HasForeignKey("Usuarios")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Usuarios");
 
                     b.Navigation("Arancel");
 

@@ -48,9 +48,8 @@ $line-height-base: 1.125;
 // $line-height-sm: 1.25;
 // $line-height-lg: 2;
 
-// $h1-font-size: $font-size-base * 2.5;
-$h2-font-size: toREM(42);
-$h2-font-size-desktop: toREM(50);
+$h1-font-size: toREM(28);
+$h2-font-size: toREM(24);
 $h3-font-size: toREM(22);
 $h4-font-size: toREM(28);
 $h5-font-size: toREM(36);
@@ -74,7 +73,7 @@ sans-serif;
 // $headings-font-style: null;
 $headings-font-weight: $font-weight-bold;
 $headings-line-height: 1;
-$headings-color: $tertiary;
+$headings-color: $primary;
 // // scss-docs-end headings-variables
 
 // // scss-docs-start display-headings
@@ -95,7 +94,7 @@ $display-line-height: $headings-line-height;
 $lead-font-size: toREM(22);
 $lead-font-weight: $font-weight-bold;
 
-$small-font-size: toREM(14);
+$small-font-size: toREM(10);
 
 // $sub-sup-font-size: .75em;
 

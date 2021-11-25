@@ -1,0 +1,12 @@
+<div class="card-info">
+    <div class="card-info__image">
+        <img [src]="data.image" alt="">
+    </div>
+    <h2 class="card-info__title">{{data.title}}</h2>
+    <ul class="card-info__list">
+        <li class="card-info__list__item" *ngFor="let item of data.services">{{item}}</li>
+    </ul>
+    <small class="card-info__note">
+        Clic para mas información…
+    </small>
+</div>

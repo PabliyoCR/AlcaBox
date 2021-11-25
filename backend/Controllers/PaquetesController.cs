@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.DataAccess;
 using backend.Models;
+using backend.Utilities;
+using backend.DTOs;
+using AutoMapper;
 
 namespace backend.Controllers
 {
@@ -15,17 +18,24 @@ namespace backend.Controllers
     public class PaquetesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public PaquetesController(ApplicationDbContext context)
+        public PaquetesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Paquetes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Paquete>>> GetPaquete()
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquete([FromQuery] PaginacionDTO paginacionDTO)
         {
-            return await _context.Paquete.ToListAsync();
+            //return await _context.Paquete.ToListAsync();
+
+            var queryable = _context.Paquete.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var paquetes = await queryable.OrderBy(x => x.Paquete_Id).Paginar(paginacionDTO).ToListAsync();
+            return _mapper.Map<List<PaqueteDTO>>(paquetes);
         }
 
         // GET: api/Paquetes/5

@@ -10,8 +10,8 @@ using backend.DataAccess;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211124015430_database")]
-    partial class database
+    [Migration("20211125044345_migra")]
+    partial class migra
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,29 @@ namespace backend.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "58b590e6-deb5-457e-8a56-75a278186b43",
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "263f897b-d27e-4a0f-8799-e05a99d805c9",
+                            ConcurrencyStamp = "2",
+                            Name = "Funcionario",
+                            NormalizedName = "Funcionario"
+                        },
+                        new
+                        {
+                            Id = "198a2ca1-6bcf-4d08-9488-08f4a20e5510",
+                            ConcurrencyStamp = "3",
+                            Name = "Usuario",
+                            NormalizedName = "Usuario"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -200,6 +223,23 @@ namespace backend.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "6c08929c-5b34-4347-9c1c-5e5edadd7802",
+                            RoleId = "58b590e6-deb5-457e-8a56-75a278186b43"
+                        },
+                        new
+                        {
+                            UserId = "e6831f22-4f71-43a4-8579-78bf21e9ae51",
+                            RoleId = "263f897b-d27e-4a0f-8799-e05a99d805c9"
+                        },
+                        new
+                        {
+                            UserId = "ec3c3873-dc40-49bc-89e6-1da64ce7c2e3",
+                            RoleId = "198a2ca1-6bcf-4d08-9488-08f4a20e5510"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -234,6 +274,18 @@ namespace backend.Migrations
                     b.HasKey("Arancel_Id");
 
                     b.ToTable("Arancel");
+
+                    b.HasData(
+                        new
+                        {
+                            Arancel_Id = 1,
+                            Nombre = "Arancel_1"
+                        },
+                        new
+                        {
+                            Arancel_Id = 2,
+                            Nombre = "Arancel_2"
+                        });
                 });
 
             modelBuilder.Entity("backend.Models.BitacoraAccion", b =>
@@ -272,6 +324,53 @@ namespace backend.Migrations
                     b.HasKey("Estado_Id");
 
                     b.ToTable("Estado");
+
+                    b.HasData(
+                        new
+                        {
+                            Estado_Id = 1,
+                            Nombre = "En espera a Courier"
+                        },
+                        new
+                        {
+                            Estado_Id = 2,
+                            Nombre = "Recibido en Courier"
+                        },
+                        new
+                        {
+                            Estado_Id = 3,
+                            Nombre = "En Tránsito a CR"
+                        },
+                        new
+                        {
+                            Estado_Id = 4,
+                            Nombre = "En vuelo"
+                        },
+                        new
+                        {
+                            Estado_Id = 5,
+                            Nombre = "Recibido en Aduanas"
+                        },
+                        new
+                        {
+                            Estado_Id = 6,
+                            Nombre = "En trámite Aduanal"
+                        },
+                        new
+                        {
+                            Estado_Id = 7,
+                            Nombre = "En proceso de Entrega"
+                        },
+                        new
+                        {
+                            Estado_Id = 8,
+                            Nombre = "Entregado"
+                        },
+                        new
+                        {
+                            Estado_Id = 9,
+                            Nombre = "Finalizado"
+                        });
                 });
 
             modelBuilder.Entity("backend.Models.Paquete", b =>
@@ -281,13 +380,13 @@ namespace backend.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("Aranceles")
+                    b.Property<int?>("Aranceles")
                         .HasColumnType("integer");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
 
-                    b.Property<int>("Estado_id")
+                    b.Property<int?>("Estados")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -303,14 +402,13 @@ namespace backend.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Usuarios")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Paquete_Id");
 
                     b.HasIndex("Aranceles");
 
-                    b.HasIndex("Estado_id");
+                    b.HasIndex("Estados");
 
                     b.HasIndex("Usuarios");
 
@@ -321,43 +419,91 @@ namespace backend.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<bool>("Acepta_Terminos")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Cedula")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Direccion")
-                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
                     b.Property<string>("Genero")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Primer_Apellido")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("Recibe_Ofertas")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Segundo_Apellido")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TipoCedula")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TipoCuenta")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6c08929c-5b34-4347-9c1c-5e5edadd7802",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dc08a525-0182-44e7-aaa7-57212dec50b4",
+                            Email = "admin@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG30+UfkKaRnN0Z+dVej4MYant/80F06OZzVzbXR9EkVp01hXq3iTpyNgw0qh8LXJg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7cbab6fc-669e-45c0-a22b-2bfa7c7c15d7",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin",
+                            Acepta_Terminos = false,
+                            Recibe_Ofertas = false
+                        },
+                        new
+                        {
+                            Id = "e6831f22-4f71-43a4-8579-78bf21e9ae51",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d6b4b05f-d86f-4263-80e7-5649ec10c2e5",
+                            Email = "billy@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "BILLY@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHTeZhLm8IQlKczGA68ctbJHSLUh9P1BMpU15U8uslR/HwPuqmw9FGGfmAVPTZEvlw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "81979d10-aa95-4435-9687-b49e98d77183",
+                            TwoFactorEnabled = false,
+                            UserName = "Billy",
+                            Acepta_Terminos = false,
+                            Recibe_Ofertas = false
+                        },
+                        new
+                        {
+                            Id = "ec3c3873-dc40-49bc-89e6-1da64ce7c2e3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "53c21db8-de06-4ed0-8b2a-4c1a9cbacabd",
+                            Email = "pablo@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PABLO@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGE1+FQAVTidS2HEa18N6a9VN9WOWlgupiFfUbbfVBjRc+ZfzTz4CbFLjR6mfogo0A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "79c5d0ca-66bc-4e7e-91d7-1afda95c6616",
+                            TwoFactorEnabled = false,
+                            UserName = "Pablo",
+                            Acepta_Terminos = false,
+                            Recibe_Ofertas = false
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -424,21 +570,15 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Models.Arancel", "Arancel")
                         .WithMany()
-                        .HasForeignKey("Aranceles")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Aranceles");
 
                     b.HasOne("backend.Models.Estado", "Estado")
                         .WithMany()
-                        .HasForeignKey("Estado_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Estados");
 
                     b.HasOne("backend.Models.ApplicationUser", "Usuario")
                         .WithMany()
-                        .HasForeignKey("Usuarios")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Usuarios");
 
                     b.Navigation("Arancel");
 

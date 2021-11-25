@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YIRErJbbcpQdLfLaTvrLod7tmoQmdBHmcfTRu3aWcqAn/XeL/J5aFjfS6CArC2o/4z8bOeo2gZz16rMdtCf0sw==",
+  "dgSpecHash": "WIPTo8Ls3q+xgsqcCAM6vsadHGWdQ5PV5j/PemQmRPcYxRDnPzYtxogg2iJl8NJKz0aZ+42QGUoYVQbr5asLHw==",
   "success": true,
   "projectFilePath": "C:\\Users\\jimen\\Documents\\GitHub\\AlcaBox\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,7 @@
     "C:\\Users\\jimen\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\5.0.2\\microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\jimen\\.nuget\\packages\\nettopologysuite\\2.4.0\\nettopologysuite.2.4.0.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.10\\npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512",

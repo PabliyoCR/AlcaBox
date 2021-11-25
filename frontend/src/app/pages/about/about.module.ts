@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutComponent } from './about.component';
+import { CardInfoModule } from 'src/app/shared/components/card-info/card-info.module';
 
 
 
@@ -9,7 +10,8 @@ import { AboutComponent } from './about.component';
     AboutComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CardInfoModule
   ]
 })
 export class AboutModule { }

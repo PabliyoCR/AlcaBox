@@ -144,3 +144,4 @@ C:\Users\jimen\Documents\GitHub\AlcaBox\backend\bin\Debug\net5.0\runtimes\win\li
 C:\Users\jimen\Documents\GitHub\AlcaBox\backend\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\jimen\Documents\GitHub\AlcaBox\backend\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\jimen\Documents\GitHub\AlcaBox\backend\obj\Debug\net5.0\backend.csproj.AssemblyReference.cache
+C:\Users\jimen\Documents\GitHub\AlcaBox\backend\bin\Debug\net5.0\NetTopologySuite.dll

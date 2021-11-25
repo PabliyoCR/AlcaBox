@@ -1,0 +1,36 @@
+@import "src/assets/scss/custom";
+
+.card-info{
+    width: toREM(314);
+    height: toREM(390);
+    -webkit-box-shadow: 0px 4px 10px -2px #707070; 
+    box-shadow: 0px 4px 10px -2px #707070;
+    border-radius: toREM(45);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    &__image{
+        height: toREM(236);
+
+        img{
+            height: 100%;
+        }
+    }
+
+    &__title{
+        margin: toREM(10) 0;
+    }
+
+    &__list{
+        align-self: flex-start;
+    }
+
+    &__note{
+        align-self: flex-end;
+        margin-top: auto;
+        padding: toREM(10) toREM(26);
+    }
+}

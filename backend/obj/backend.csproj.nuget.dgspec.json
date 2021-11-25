@@ -82,6 +82,10 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "NetTopologySuite": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[5.0.10, )"

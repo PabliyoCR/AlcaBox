@@ -11,44 +11,49 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { AdminAuthorizationGuard, AuthenticationGuard, FouncionarioAuthorizationGuard, UsuarioAuthorizationGuard } from './shared/guards/authentication.guard';
 
 const routes: Routes = [
- /*  {
-    path : '',
-    loadChildren : () => import('./pages/homepage/homepage.module').then(m => m.HomepageModule)
-  }, */
   {
     path : '',
-    component : HomepageComponent
+    component : HomepageComponent,
+    loadChildren : () => import('./pages/homepage/homepage.module').then(m => m.HomepageModule)
   },
   {
     path : 'login',
-    component : LoginComponent
+    component : LoginComponent,
+    loadChildren : () => import('./pages/authentication/login/login.module').then(m => m.LoginModule)
   },
   {
     path : 'signup',
-    component : SignupComponent
+    component : SignupComponent,
+    loadChildren : () => import('./pages/authentication/signup/signup.module').then(m => m.SignupModule)
   },
   {
     path : 'packages',
     component : PackagesComponent,
+    loadChildren : () => import('./pages/packages/packages.module').then(m => m.PackagesModule),
     canActivate:[AuthenticationGuard, UsuarioAuthorizationGuard]
   },
   {
     path : 'reports',
     component : ReportsComponent,
+    loadChildren : () => import('./pages/reports/reports.module').then(m => m.ReportsModule),
     canActivate:[AuthenticationGuard, FouncionarioAuthorizationGuard]
   },
    {
     path : 'maintenance',
     component : MaintenanceComponent,
+    loadChildren : () => import('./pages/maintenance/maintenance.module').then(m => m.MaintenanceModule),
     canActivate:[AuthenticationGuard, AdminAuthorizationGuard]
   },
   {
     path : 'about',
-    component : AboutComponent
+    component : AboutComponent,
+    loadChildren : () => import('./pages/about/about.module').then(m => m.AboutModule),
   },
   {
     path : 'help',
-    component : HelpComponent
+    component : HelpComponent,
+    loadChildren : () => import('./pages/help/help.module').then(m => m.HelpModule)
+
   }
 ];
 

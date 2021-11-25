@@ -7,7 +7,7 @@ $gray-100: #F4F4F4;
 // $gray-300: #dee2e6;
 // $gray-400: #ced4da;
 $gray-500: #707070;
-// $gray-600: #6c757d;
+$gray-600: #767676;
 // $gray-700: #495057;
 // $gray-800: #343a40;
 // $gray-900: #212529;
@@ -23,7 +23,7 @@ $grays: map-merge(("100": $gray-100,
   // "300": $gray-300,
   // "400": $gray-400,
   "500": $gray-500,
-  // "600": $gray-600,
+  "600": $gray-600,
   // "700": $gray-700,
   // "800": $gray-800,
   // "900": $gray-900
@@ -73,7 +73,7 @@ $tertiary: $orange;
 // $warning:       $yellow;
 $danger: $red;
 $light: $gray-100;
-$dark: $black;
+$dark: $gray-600;
 // // scss-docs-end theme-color-variables
 
 // // scss-docs-start theme-colors-map
