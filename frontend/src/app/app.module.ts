@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './shared/guards/AuthInterceptor';
 import { UserService } from './shared/services/user.service';
 import { CardInfoModule } from './shared/components/card-info/card-info.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CardInfoModule } from './shared/components/card-info/card-info.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CardInfoModule
+    CardInfoModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService,{
     provide:HTTP_INTERCEPTORS,

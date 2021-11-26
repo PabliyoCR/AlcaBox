@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import{  FormGroup, FormControl, Validators, FormBuilder}from'@angular/forms'
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
-import { IAutentificacion } from 'src/app/shared/models/authenticationDTOs/IAutentificacion.model';
-import { AuthenticationResponse } from 'src/app/shared/models/authenticationDTOs/security';
+import { IAutentificacion } from 'src/app/shared/models/DTOs/authenticationDTOs/IAutentificacion.model';
+import { AuthenticationResponse } from 'src/app/shared/models/DTOs/authenticationDTOs/security';
 
 @Component({
   selector: 'app-login',

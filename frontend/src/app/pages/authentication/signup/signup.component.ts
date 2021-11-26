@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
-import { UserDTO } from 'src/app/shared/models/authenticationDTOs/CredencialesDTO.model';
-import { AuthenticationResponse } from 'src/app/shared/models/authenticationDTOs/security';
+import { UserDTO } from 'src/app/shared/models/DTOs/authenticationDTOs/CredencialesDTO.model';
+import { AuthenticationResponse } from 'src/app/shared/models/DTOs/authenticationDTOs/security';
 
 @Component({
   selector: 'app-signup',

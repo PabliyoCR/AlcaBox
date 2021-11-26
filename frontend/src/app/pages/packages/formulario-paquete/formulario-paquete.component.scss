@@ -1,0 +1,11 @@
+@import "src/assets/scss/custom";
+
+.formulario{
+
+    width: 70%;
+    margin: 0 auto;
+
+    &__input{
+        width: 100%;
+    }
+}

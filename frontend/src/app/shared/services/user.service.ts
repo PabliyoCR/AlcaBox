@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { IPerfilUsuaio } from '../models/authenticationDTOs/IPerfilUsuaio.model';
-import { UserDTO } from '../models/authenticationDTOs/CredencialesDTO.model';
+import { IPerfilUsuaio } from '../models/DTOs/authenticationDTOs/IPerfilUsuaio.model';
+import { UserDTO } from '../models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
-import { AuthenticationResponse } from '../models/authenticationDTOs/security';
-import { IAutentificacion } from '../models/authenticationDTOs/IAutentificacion.model';
+import { AuthenticationResponse } from '../models/DTOs/authenticationDTOs/security';
+import { IAutentificacion } from '../models/DTOs/authenticationDTOs/IAutentificacion.model';
 
 
 @Injectable({
@@ -16,18 +16,17 @@ import { IAutentificacion } from '../models/authenticationDTOs/IAutentificacion.
 export class UserService {
   private _refres$ = new Subject<void>();
   private actualizarFormulario = new BehaviorSubject<UserDTO>({} as any);
-  urlAPI = environment.urlAPI
   private readonly keyToken = 'token';
 
   constructor(private http: HttpClient) {
   }
 
   login(usuario:IAutentificacion) : Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(this.urlAPI + "/auth/login", usuario);
+    return this.http.post<AuthenticationResponse>(environment.urlAPI + "/auth/login", usuario);
   }
 
   guardarUsuario(usuario: UserDTO): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(this.urlAPI+ "/auth/register", usuario);
+    return this.http.post<AuthenticationResponse>(environment.urlAPI+ "/auth/register", usuario);
   }
 
   isAuthenticated(){
@@ -63,11 +62,11 @@ export class UserService {
   }
 
   obtenerUsuario(id: string): Observable<UserDTO> {
-    return this.http.get<UserDTO>(this.urlAPI + id);
+    return this.http.get<UserDTO>(environment.urlAPI + id);
   }
 
   actualizarUsuario(id:string, usuario:UserDTO) :Observable<UserDTO>{
-    return this.http.put<UserDTO>(this.urlAPI + '/' + id, usuario);
+    return this.http.put<UserDTO>(environment.urlAPI + '/' + id, usuario);
   }
 
   actualizar(usuario: UserDTO){
@@ -81,7 +80,7 @@ export class UserService {
 
   //Trae la lista de los objetos
   /* obtenerUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Mensaje>(`${this.urlApp + this.urlAPI}`)
+    return this.http.get<Mensaje>(`${this.urlApp + environment.urlAPI}`)
       .pipe(
         map(this.tranformarUsurarios)
       )
@@ -115,7 +114,7 @@ export class UserService {
   } */
 
   /* deshabilitarUsuario(id: string): Observable<Usuarios> {
-    return this.http.get<Usuarios>(this.urlApp + this.urlAPI + "/cambiarEstado/" + id).pipe(
+    return this.http.get<Usuarios>(this.urlApp + environment.urlAPI + "/cambiarEstado/" + id).pipe(
       tap(() => {
         this._refres$.next();
       })
@@ -123,7 +122,7 @@ export class UserService {
   }
 
   editarUsuario(id: string): Observable<Usuarios> {
-    return this.http.get<Usuarios>(this.urlApp + this.urlAPI + id).pipe(
+    return this.http.get<Usuarios>(this.urlApp + environment.urlAPI + id).pipe(
       tap(() => {
         this._refres$.next();
       })
@@ -132,7 +131,7 @@ export class UserService {
 
   /*    cmabiar contrasena   */
   /* recuperarContrasena(correoElectronico: string): Observable<Usuarios> {
-    return this.http.get<Usuarios>(this.urlApp + this.urlAPI + "/recuperarContrasena/" + correoElectronico);
+    return this.http.get<Usuarios>(this.urlApp + environment.urlAPI + "/recuperarContrasena/" + correoElectronico);
   } */
 
 

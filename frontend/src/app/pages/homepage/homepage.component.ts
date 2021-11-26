@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from 'src/app/shared/models/site/card.model';
+import { Card } from 'src/app/shared/models/front/card.model';
 
 @Component({
   selector: 'app-homepage',
