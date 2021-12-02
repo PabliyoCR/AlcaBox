@@ -16,8 +16,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NetTopologySuite;
-using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -41,15 +39,11 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             // Mapeo Entidades
-            services.AddAutoMapper(typeof(Startup));
-            services.AddSingleton(provider =>
-                new MapperConfiguration(config =>
-                {
-                    var geometryFactory = provider.GetRequiredService<GeometryFactory>();
-                    config.AddProfile(new AutoMapperProfiles(geometryFactory));
-                }).CreateMapper());
-
-            services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
+            //services.AddAutoMapper(typeof(AutoMapperProfiles));
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new AutoMapperProfiles(provider.GetService<ApplicationDbContext>(), provider.GetService<UserManager<ApplicationUser>>()));
+            }).CreateMapper());
 
             // Conexion con la Base de datos
             services.AddDbContext<ApplicationDbContext>(options => {
@@ -57,34 +51,33 @@ namespace backend
             });
 
             // Identificación de Usuarios
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequiredLength = 8;
-            }).AddEntityFrameworkStores<ApplicationDbContext>()
+                //options.SignIn.RequireConfirmedAccount = true
+            }).AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+                
+
 
             //Autenticacion de usuarios
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidAudience = Configuration["AuthSettings:Audience"],
-                    ValidIssuer = Configuration["AuthSettings:Issuer"],
-                    RequireExpirationTime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"]))
-                };
-            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                    options.TokenValidationParameters = new TokenValidationParameters {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        //ValidAudience = Configuration["AuthSettings:Audience"],
+                        //ValidIssuer = Configuration["AuthSettings:Issuer"],
+                        RequireExpirationTime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"])),
+                        ClockSkew = TimeSpan.Zero
+                    });
 
             //Autorizacion de usuarios
             services.AddAuthorization(options => {
@@ -107,6 +100,26 @@ namespace backend
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                         new string[]{ }
+                    }
+                });
             });
         }
 

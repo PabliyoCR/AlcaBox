@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaintenanceComponent implements OnInit {
 
+  panelOpenState = false;
+  
   constructor() { }
 
   ngOnInit(): void {

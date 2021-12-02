@@ -65,6 +65,24 @@ section{
   padding: toREM(50) 0;
 }
 
+// Tables
 table {
     width: 100%;
+}
+
+.mat-row{
+  cursor: pointer;
+
+  &:hover{
+    background-color: rgba($primary, $alpha: 0.1);
+  }
+}
+
+//Angular Material
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 99999 !important;
+}
+
+.mat-form-field{
+  margin: 0 10px;
 }

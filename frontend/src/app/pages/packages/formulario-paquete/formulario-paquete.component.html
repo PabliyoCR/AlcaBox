@@ -1,4 +1,4 @@
-<div class="modal fade" id="formPaquete" tabindex="-1" aria-labelledby="formPaqueteLabel" aria-hidden="true">
+<div class="modal fade" #formPaquete id="formPaquete" tabindex="-1" aria-labelledby="formPaqueteLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,19 +7,58 @@
       </div>
       <div class="modal-body">
         
-        <form [formGroup]="paqueteForm" class="formulario">
-          <ng-container *ngFor="let control of controls">
-            <mat-form-field class="formulario__input" appearance="fill">
-              <mat-label>{{control.id}}</mat-label>
-              <input matInput [type]="control.type" [id] = "control.id" [formControlName] ="control.id">
-            </mat-form-field>
-          </ng-container>
-        </form> 
+        <form [formGroup]="paqueteForm" class="formulario" (submit)="guardarPaquete()">
+          <mat-form-field class="formulario__input" appearance="fill" *ngIf="edit">
+            <mat-label>ID Paquete</mat-label>
+            <input  matInput type="number" id = "paqueteId" formControlName ="paqueteId" value=0>
+          </mat-form-field>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+          <ng-container *ngFor="let control of controls" >
+            <mat-form-field class="formulario__input" appearance="fill" *ngIf ="['text', 'number'].includes(control.type)">
+              <mat-label>{{control.placeholder}}</mat-label>
+              <input  matInput [type]="control.type" [id] = "control.id" [formControlName] ="control.id">
+            </mat-form-field>
+
+            <mat-form-field class="formulario__input" appearance="fill" *ngIf ="['textarea'].includes(control.type)">
+              <mat-label>{{control.placeholder}}</mat-label>
+              <textarea   matInput [id] = "control.id" [formControlName] ="control.id"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill" *ngIf ="['autocomplete'].includes(control.type)">
+              <mat-label>{{control.placeholder}}</mat-label>
+              <input type="text" matInput [formControlName]="control.id" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div *ngIf ="['autocomplete'].includes(control.type)" class="d-inline w-100">
+               {{getNombreUsuario()}}
+            </div><br>
+            
+            <mat-form-field appearance="fill" *ngIf ="['date'].includes(control.type)">
+              <mat-label>{{control.placeholder}}</mat-label>
+              <input matInput [matDatepicker]="picker1" [formControlName] ="control.id">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" *ngIf ="['select'].includes(control.type)">
+              <mat-label>{{control.placeholder}}</mat-label>
+              <mat-select [formControlName] ="control.id">
+                <mat-option *ngFor="let option of control.options" [value]="option.value">
+                  {{option.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+          </ng-container>
+          <div class="modal-footer">
+            <button id = "closeModalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form> 
       </div>
     </div>
   </div>

@@ -1,0 +1,10 @@
+@import "src/assets/scss/custom";
+
+.reporte{
+    padding: toREM(30);
+
+    &__logo{
+        width: toREM(300);
+        margin: toREM(20);
+    }
+}

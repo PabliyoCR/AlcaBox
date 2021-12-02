@@ -1,0 +1,63 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="detailPaqueteLabel">{{metadata.title}}</h5>
+        <button type="button" class="btn-close" (click)="bsModalRef.hide()" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] = "genericFormGroup" class="formulario" (submit)="submit()">
+            <mat-form-field class="formulario__input" appearance="fill" *ngIf="edit">
+                <mat-label>{{metadata.pk.name}}</mat-label>
+                <input  matInput [type]="metadata.pk.type" [id] = "metadata.pk.name" [formControlName] ="metadata.pk.name">
+            </mat-form-field>
+                
+            <ng-container *ngFor="let control of controls" >
+                <mat-form-field class="formulario__input" appearance="fill" *ngIf ="['text', 'number', 'email', 'password'].includes(control.type)">
+                    <mat-label>{{control.placeholder}}</mat-label>
+                    <input  matInput [type]="control.type" [id] = "control.id" [formControlName] ="control.id">
+                </mat-form-field>
+                
+                <mat-form-field class="formulario__input" appearance="fill" *ngIf ="['textarea'].includes(control.type)">
+                    <mat-label>{{control.placeholder}}</mat-label>
+                    <textarea  matInput [id] = "control.id" [formControlName] ="control.id"></textarea>
+                </mat-form-field>
+                
+                <!-- <mat-form-field class="example-full-width" appearance="fill" *ngIf ="['autocomplete'].includes(control.type)">
+                    <mat-label>{{control.placeholder}}</mat-label>
+                    <input type="text" matInput [formControlName]="control.id" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div *ngIf ="['autocomplete'].includes(control.type)" class="d-inline w-100">
+                    {{getNombreUsuario()}}
+                </div><br> -->
+            
+                <mat-form-field appearance="fill" *ngIf ="['date'].includes(control.type)">
+                    <mat-label>{{control.placeholder}}</mat-label>
+                    <input matInput [matDatepicker]="picker1" [formControlName] ="control.id">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill" *ngIf ="['select'].includes(control.type)">
+                    <mat-label>{{control.placeholder}}</mat-label>
+                    <mat-select [formControlName] ="control.id">
+                        <mat-option *ngFor="let option of control.options" [value]="option.value">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-checkbox *ngIf ="['checkbox'].includes(control.type)" [formControlName]="control.id" color = "primary">{{control.placeholder}}</mat-checkbox>
+            
+            </ng-container>
+
+            <div class="modal-footer">
+                <button id = "closeModalBtn" type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form> 
+    </div>
+</div>

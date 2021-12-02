@@ -47,24 +47,24 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "58b590e6-deb5-457e-8a56-75a278186b43",
+                            Id = "Admin",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
-                            NormalizedName = "Admin"
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "263f897b-d27e-4a0f-8799-e05a99d805c9",
+                            Id = "Funcionario",
                             ConcurrencyStamp = "2",
                             Name = "Funcionario",
-                            NormalizedName = "Funcionario"
+                            NormalizedName = "FUNCIONARIO"
                         },
                         new
                         {
-                            Id = "198a2ca1-6bcf-4d08-9488-08f4a20e5510",
+                            Id = "Usuario",
                             ConcurrencyStamp = "3",
                             Name = "Usuario",
-                            NormalizedName = "Usuario"
+                            NormalizedName = "USUARIO"
                         });
                 });
 
@@ -90,76 +90,6 @@ namespace backend.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -225,18 +155,23 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "6c08929c-5b34-4347-9c1c-5e5edadd7802",
-                            RoleId = "58b590e6-deb5-457e-8a56-75a278186b43"
+                            UserId = "432e0b12-6f62-4a9e-8f77-7e4c2440aa8f",
+                            RoleId = "Admin"
                         },
                         new
                         {
-                            UserId = "e6831f22-4f71-43a4-8579-78bf21e9ae51",
-                            RoleId = "263f897b-d27e-4a0f-8799-e05a99d805c9"
+                            UserId = "dc5214ae-d794-4da1-a4b8-4c32883a026e",
+                            RoleId = "Funcionario"
                         },
                         new
                         {
-                            UserId = "ec3c3873-dc40-49bc-89e6-1da64ce7c2e3",
-                            RoleId = "198a2ca1-6bcf-4d08-9488-08f4a20e5510"
+                            UserId = "0414ef00-51f7-4cc5-aae8-b783ad4f3769",
+                            RoleId = "Usuario"
+                        },
+                        new
+                        {
+                            UserId = "51596782-b6e5-43de-9a9b-0087a57ec613",
+                            RoleId = "Usuario"
                         });
                 });
 
@@ -259,9 +194,199 @@ namespace backend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("backend.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("cedula")
+                        .HasColumnType("text");
+
+                    b.Property<string>("direccion")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<int>("genero")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("primerApellido")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("recibeOfertas")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("segundoApellido")
+                        .HasColumnType("text");
+
+                    b.Property<int>("tipoCedula")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("tipoCuenta")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "432e0b12-6f62-4a9e-8f77-7e4c2440aa8f",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "330983d8-39c4-497a-a0bf-b5be751c189a",
+                            Email = "admin@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHHysBNJsqz26DN7/oUDkt+mU0ZXMCTD8fSquZG9FhKl37FOugpz6Dp50hCKzUIIog==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "00ad4e9a-3230-4fab-9c19-2cbd1ebca9f6",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin",
+                            cedula = "11111111",
+                            direccion = "Direcion Admin",
+                            genero = 1,
+                            nombre = "AlcaBox Admin",
+                            primerApellido = "Alca",
+                            recibeOfertas = false,
+                            segundoApellido = "Box",
+                            tipoCedula = 1,
+                            tipoCuenta = 1
+                        },
+                        new
+                        {
+                            Id = "dc5214ae-d794-4da1-a4b8-4c32883a026e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e2af34ab-a66e-4c46-9f6c-648b966cd61d",
+                            Email = "billy@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "BILLY@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENLtbroaBVGLd8PplJXprnZJ9UMQts3yYYn9GH6ojTlxhqsZ3Ot9qrT8yT7kAhxs1Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "13d73cdc-26f5-496c-8758-1b695b10c83b",
+                            TwoFactorEnabled = false,
+                            UserName = "Billy",
+                            cedula = "87654321",
+                            direccion = "Direcion Funcionario",
+                            genero = 1,
+                            nombre = "Billy",
+                            primerApellido = "H",
+                            recibeOfertas = false,
+                            segundoApellido = "",
+                            tipoCedula = 1,
+                            tipoCuenta = 1
+                        },
+                        new
+                        {
+                            Id = "0414ef00-51f7-4cc5-aae8-b783ad4f3769",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "65671a1a-9ff5-4fac-a7e2-5ec8fe1c255d",
+                            Email = "pablo@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PABLO@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGP0753CNzZD3cy1MY+KpGQL8v8Il6UsArn0WKbiFc86VnFkTiAr4VWxP5gbreXakQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ff8384df-9221-443d-9880-5cf9e78bb5bf",
+                            TwoFactorEnabled = false,
+                            UserName = "Pablo",
+                            cedula = "12345678",
+                            direccion = "Direcion Usuario",
+                            genero = 1,
+                            nombre = "Pablo J.",
+                            primerApellido = "J",
+                            recibeOfertas = true,
+                            segundoApellido = "",
+                            tipoCedula = 1,
+                            tipoCuenta = 1
+                        },
+                        new
+                        {
+                            Id = "51596782-b6e5-43de-9a9b-0087a57ec613",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1764921b-c157-448c-b791-a45d3c0b4479",
+                            Email = "bot@alcabox.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "BOT@ALCABOX.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ1eyj9nEtBMbk26vR0TFTSqg2/eO04M7rBh5wp7f3KsswKFaYPpx+dH2tqxBXa/Jg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "43149d2d-5c29-4178-a302-762b52c1eb95",
+                            TwoFactorEnabled = false,
+                            UserName = "Bot",
+                            cedula = "55555555",
+                            direccion = "Direcion Bot",
+                            genero = 1,
+                            nombre = "Bot R.",
+                            primerApellido = "B",
+                            recibeOfertas = false,
+                            segundoApellido = "",
+                            tipoCedula = 1,
+                            tipoCuenta = 1
+                        });
+                });
+
             modelBuilder.Entity("backend.Models.Arancel", b =>
                 {
-                    b.Property<int>("Arancel_Id")
+                    b.Property<int>("ArancelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -269,19 +394,19 @@ namespace backend.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Arancel_Id");
+                    b.HasKey("ArancelId");
 
                     b.ToTable("Arancel");
 
                     b.HasData(
                         new
                         {
-                            Arancel_Id = 1,
+                            ArancelId = 1,
                             Nombre = "Arancel_1"
                         },
                         new
                         {
-                            Arancel_Id = 2,
+                            ArancelId = 2,
                             Nombre = "Arancel_2"
                         });
                 });
@@ -311,7 +436,7 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Estado", b =>
                 {
-                    b.Property<int>("Estado_Id")
+                    b.Property<int>("EstadoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -319,72 +444,72 @@ namespace backend.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Estado_Id");
+                    b.HasKey("EstadoId");
 
                     b.ToTable("Estado");
 
                     b.HasData(
                         new
                         {
-                            Estado_Id = 1,
+                            EstadoId = 1,
                             Nombre = "En espera a Courier"
                         },
                         new
                         {
-                            Estado_Id = 2,
+                            EstadoId = 2,
                             Nombre = "Recibido en Courier"
                         },
                         new
                         {
-                            Estado_Id = 3,
+                            EstadoId = 3,
                             Nombre = "En Tránsito a CR"
                         },
                         new
                         {
-                            Estado_Id = 4,
+                            EstadoId = 4,
                             Nombre = "En vuelo"
                         },
                         new
                         {
-                            Estado_Id = 5,
+                            EstadoId = 5,
                             Nombre = "Recibido en Aduanas"
                         },
                         new
                         {
-                            Estado_Id = 6,
+                            EstadoId = 6,
                             Nombre = "En trámite Aduanal"
                         },
                         new
                         {
-                            Estado_Id = 7,
+                            EstadoId = 7,
                             Nombre = "En proceso de Entrega"
                         },
                         new
                         {
-                            Estado_Id = 8,
+                            EstadoId = 8,
                             Nombre = "Entregado"
                         },
                         new
                         {
-                            Estado_Id = 9,
+                            EstadoId = 9,
                             Nombre = "Finalizado"
                         });
                 });
 
             modelBuilder.Entity("backend.Models.Paquete", b =>
                 {
-                    b.Property<int>("Paquete_Id")
+                    b.Property<int>("PaqueteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("Aranceles")
+                    b.Property<int>("ArancelId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
 
-                    b.Property<int?>("Estados")
+                    b.Property<int>("EstadoId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -399,109 +524,18 @@ namespace backend.Migrations
                     b.Property<int>("Tracking")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Usuarios")
+                    b.Property<string>("UsuarioId")
                         .HasColumnType("text");
 
-                    b.HasKey("Paquete_Id");
+                    b.HasKey("PaqueteId");
 
-                    b.HasIndex("Aranceles");
+                    b.HasIndex("ArancelId");
 
-                    b.HasIndex("Estados");
+                    b.HasIndex("EstadoId");
 
-                    b.HasIndex("Usuarios");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Paquete");
-                });
-
-            modelBuilder.Entity("backend.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<bool>("Acepta_Terminos")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Cedula")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Direccion")
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
-
-                    b.Property<string>("Genero")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Primer_Apellido")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Recibe_Ofertas")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Segundo_Apellido")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TipoCedula")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TipoCuenta")
-                        .HasColumnType("text");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "6c08929c-5b34-4347-9c1c-5e5edadd7802",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc08a525-0182-44e7-aaa7-57212dec50b4",
-                            Email = "admin@alcabox.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG30+UfkKaRnN0Z+dVej4MYant/80F06OZzVzbXR9EkVp01hXq3iTpyNgw0qh8LXJg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7cbab6fc-669e-45c0-a22b-2bfa7c7c15d7",
-                            TwoFactorEnabled = false,
-                            UserName = "Admin",
-                            Acepta_Terminos = false,
-                            Recibe_Ofertas = false
-                        },
-                        new
-                        {
-                            Id = "e6831f22-4f71-43a4-8579-78bf21e9ae51",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6b4b05f-d86f-4263-80e7-5649ec10c2e5",
-                            Email = "billy@alcabox.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "BILLY@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHTeZhLm8IQlKczGA68ctbJHSLUh9P1BMpU15U8uslR/HwPuqmw9FGGfmAVPTZEvlw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "81979d10-aa95-4435-9687-b49e98d77183",
-                            TwoFactorEnabled = false,
-                            UserName = "Billy",
-                            Acepta_Terminos = false,
-                            Recibe_Ofertas = false
-                        },
-                        new
-                        {
-                            Id = "ec3c3873-dc40-49bc-89e6-1da64ce7c2e3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "53c21db8-de06-4ed0-8b2a-4c1a9cbacabd",
-                            Email = "pablo@alcabox.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PABLO@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGE1+FQAVTidS2HEa18N6a9VN9WOWlgupiFfUbbfVBjRc+ZfzTz4CbFLjR6mfogo0A==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "79c5d0ca-66bc-4e7e-91d7-1afda95c6616",
-                            TwoFactorEnabled = false,
-                            UserName = "Pablo",
-                            Acepta_Terminos = false,
-                            Recibe_Ofertas = false
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -515,7 +549,7 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("backend.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -524,7 +558,7 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("backend.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -539,7 +573,7 @@ namespace backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("backend.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -548,7 +582,7 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("backend.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -568,15 +602,19 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Models.Arancel", "Arancel")
                         .WithMany()
-                        .HasForeignKey("Aranceles");
+                        .HasForeignKey("ArancelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("backend.Models.Estado", "Estado")
                         .WithMany()
-                        .HasForeignKey("Estados");
+                        .HasForeignKey("EstadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("backend.Models.ApplicationUser", "Usuario")
                         .WithMany()
-                        .HasForeignKey("Usuarios");
+                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("Arancel");
 

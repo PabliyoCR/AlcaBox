@@ -1,7 +1,35 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <p>maintenance works!</p>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mantenimiento de Usuarios
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div app-mantenimiento-usuarios></div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mantenimiento de Estados
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div app-mantenimiento-estados></div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mantenimiento de Aranceles
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div app-mantenimiento-aranceles></div>
+            </mat-expansion-panel>
         </div>
     </div>
 </div>

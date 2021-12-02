@@ -1,4 +1,6 @@
-﻿using backend.Models;
+﻿using AutoMapper;
+using backend.DTOs;
+using backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +18,7 @@ namespace backend.Services
     public interface IUserService
     {
 
-        Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel model);
+        Task<UserManagerResponse> RegisterUserAsync(UsuarioCreacionDTO usuariocreacionDTO);
 
         Task<UserManagerResponse> LoginUserAsync(LoginViewModel model);
 
@@ -30,47 +32,51 @@ namespace backend.Services
     public class UserService : IUserService
     {
 
-        private UserManager<IdentityUser> _userManger;
+        private UserManager<ApplicationUser> _userManager;
         private IConfiguration _configuration;
         private IMailService _mailService;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IMapper _mapper;
 
-        public UserService(UserManager<IdentityUser> userManager, IConfiguration configuration, IMailService mailService)
+        public UserService(UserManager<ApplicationUser> userManager, IConfiguration configuration, IMailService mailService, IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
-            _userManger = userManager;
+            _userManager = userManager;
             _configuration = configuration;
             _mailService = mailService;
+            _mapper = mapper;
+            _roleManager = roleManager;
         }
 
-        public async Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel model)
+        public async Task<UserManagerResponse> RegisterUserAsync(UsuarioCreacionDTO usuarioCreacionDTO)
         {
-            if (model == null)
+            if (usuarioCreacionDTO == null)
                 throw new NullReferenceException("Register Model is null");
 
-            if (model.Password != model.ConfirmPassword)
+            if (usuarioCreacionDTO.password != usuarioCreacionDTO.confirmPassword)
                 return new UserManagerResponse
                 {
                     Message = "Confirm password doesn't match the password",
                     IsSuccess = false,
                 };
 
-            var identityUser = new IdentityUser
-            {
-                Email = model.Email,
-                UserName = model.Email,
-            };
+            var applicationUser = _mapper.Map<ApplicationUser>(usuarioCreacionDTO);
+            applicationUser.UserName = usuarioCreacionDTO.email;
+            applicationUser.Id = Guid.NewGuid().ToString();
 
-            var result = await _userManger.CreateAsync(identityUser, model.Password);
+            var result = await _userManager.CreateAsync(applicationUser, usuarioCreacionDTO.password);
 
             if (result.Succeeded)
             {
-                var confirmEmailToken = await _userManger.GenerateEmailConfirmationTokenAsync(identityUser);
+                var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
 
                 var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
                 var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
 
-                string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={identityUser.Id}&token={validEmailToken}";
+                await _userManager.AddToRoleAsync(applicationUser, "Usuario");
 
-                await _mailService.SendEmailAsync(identityUser.Email, "Confirm your email", $"<h1>Welcome to Auth Demo</h1>" +
+                string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={applicationUser.Id}&token={validEmailToken}";
+
+                await _mailService.SendEmailAsync(applicationUser.Email, "Confirm your email", $"<h1>Welcome to Auth Demo</h1>" +
                     $"<p>Please confirm your email by <a href='{url}'>Clicking here</a></p>");
 
 
@@ -92,7 +98,7 @@ namespace backend.Services
 
         public async Task<UserManagerResponse> LoginUserAsync(LoginViewModel model)
         {
-            var user = await _userManger.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
             if (user == null)
             {
@@ -103,7 +109,7 @@ namespace backend.Services
                 };
             }
 
-            var result = await _userManger.CheckPasswordAsync(user, model.Password);
+            var result = await _userManager.CheckPasswordAsync(user, model.Password);
 
             if (!result)
                 return new UserManagerResponse
@@ -112,7 +118,7 @@ namespace backend.Services
                     IsSuccess = false,
                 };
 
-            var role = await _userManger.GetRolesAsync(user);
+            var role = await _userManager.GetRolesAsync(user);
             IdentityOptions _options = new IdentityOptions();
 
             var claims = new[]
@@ -143,7 +149,7 @@ namespace backend.Services
 
         public async Task<UserManagerResponse> ConfirmEmailAsync(string userId, string token)
         {
-            var user = await _userManger.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
                 return new UserManagerResponse
                 {
@@ -154,7 +160,7 @@ namespace backend.Services
             var decodedToken = WebEncoders.Base64UrlDecode(token);
             string normalToken = Encoding.UTF8.GetString(decodedToken);
 
-            var result = await _userManger.ConfirmEmailAsync(user, normalToken);
+            var result = await _userManager.ConfirmEmailAsync(user, normalToken);
 
             if (result.Succeeded)
                 return new UserManagerResponse
@@ -173,7 +179,7 @@ namespace backend.Services
 
         public async Task<UserManagerResponse> ForgetPasswordAsync(string email)
         {
-            var user = await _userManger.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
                 return new UserManagerResponse
                 {
@@ -181,7 +187,7 @@ namespace backend.Services
                     Message = "No user associated with email",
                 };
 
-            var token = await _userManger.GeneratePasswordResetTokenAsync(user);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var encodedToken = Encoding.UTF8.GetBytes(token);
             var validToken = WebEncoders.Base64UrlEncode(encodedToken);
 
@@ -199,7 +205,7 @@ namespace backend.Services
 
         public async Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordViewModel model)
         {
-            var user = await _userManger.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
                 return new UserManagerResponse
                 {
@@ -217,7 +223,7 @@ namespace backend.Services
             var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
             string normalToken = Encoding.UTF8.GetString(decodedToken);
 
-            var result = await _userManger.ResetPasswordAsync(user, normalToken, model.NewPassword);
+            var result = await _userManager.ResetPasswordAsync(user, normalToken, model.NewPassword);
 
             if (result.Succeeded)
                 return new UserManagerResponse

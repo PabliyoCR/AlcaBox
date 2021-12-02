@@ -1,0 +1,15 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="detailPaqueteLabel">{{title}}</h5>
+        <button type="button" class="btn-close" (click)="bsModalRef.hide()" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="message mb-4">
+            {{message}}
+        </div>
+        <div class="text-end">
+            <button  class="btn btn-secondary" (click)="bsModalRef.hide()">Cerrar</button>
+            <button  class="btn btn-primary" (click)="confirmar()">{{confirmText}}</button>
+        </div>
+    </div>
+</div>

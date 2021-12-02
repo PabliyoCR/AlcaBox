@@ -1,0 +1,13 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="detailPaqueteLabel">{{title}}</h5>
+        <button type="button" class="btn-close" (click)="bsModalRef.hide()" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <ng-container *ngIf="data">
+            <div *ngFor="let item of data | keyvalue:onCompare">
+                {{item.key}} : {{item.value}}
+            </div>
+        </ng-container>
+    </div>
+</div>

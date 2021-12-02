@@ -11,34 +11,31 @@ namespace backend.Models
     public class ApplicationUser : IdentityUser
     {
         //[Required]
-        public string Cedula { get; set; }
+        public string cedula { get; set; }
 
         //[Required]
-        public string Nombre { get; set; }
+        public string nombre { get; set; }
 
         //[Required]
-        public string Primer_Apellido { get; set; }
+        public string primerApellido { get; set; }
 
         //[Required]
-        public string Segundo_Apellido { get; set; }
+        public string segundoApellido { get; set; }
 
         //[Required]
-        public string TipoCedula { get; set; }
+        public int tipoCedula { get; set; }
 
         //[Required]
-        public string Genero { get; set; }
+        public int genero { get; set; }
 
         //[Required]
         [MaxLength(150)]
-        public string Direccion { get; set; }
+        public string direccion { get; set; }
 
-        public bool Recibe_Ofertas { get; set; }
-
-        //[NotMapped]
-        public bool Acepta_Terminos { get; set; }
+        public bool recibeOfertas { get; set; }
 
         //[Required]
-        public string TipoCuenta { get; set; }
+        public int tipoCuenta { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace backend.Models
     public class Arancel
     {
         [Key]
-        public int Arancel_Id { get; set; }
+        public int ArancelId { get; set; }
 
         public string Nombre { get; set; }
     }

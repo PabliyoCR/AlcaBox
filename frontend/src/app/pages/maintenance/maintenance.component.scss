@@ -1,0 +1,7 @@
+@import "src/assets/scss/custom";
+
+
+mat-expansion-panel{
+    margin: toREM(23) 0;
+    background: rgba($color: $primary, $alpha: 0.1);
+}

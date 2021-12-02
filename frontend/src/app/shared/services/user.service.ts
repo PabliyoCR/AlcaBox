@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IPerfilUsuaio } from '../models/DTOs/authenticationDTOs/IPerfilUsuaio.model';
-import { UserDTO } from '../models/DTOs/authenticationDTOs/CredencialesDTO.model';
+import { UserCreacionDTO, UsuarioDTO } from '../models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
 import { AuthenticationResponse } from '../models/DTOs/authenticationDTOs/security';
@@ -14,8 +14,7 @@ import { IAutentificacion } from '../models/DTOs/authenticationDTOs/IAutentifica
 })
 
 export class UserService {
-  private _refres$ = new Subject<void>();
-  private actualizarFormulario = new BehaviorSubject<UserDTO>({} as any);
+
   private readonly keyToken = 'token';
 
   constructor(private http: HttpClient) {
@@ -25,8 +24,13 @@ export class UserService {
     return this.http.post<AuthenticationResponse>(environment.urlAPI + "/auth/login", usuario);
   }
 
-  guardarUsuario(usuario: UserDTO): Observable<AuthenticationResponse> {
+  guardarUsuario(usuario: UserCreacionDTO): Observable<AuthenticationResponse> {
+    console.log(usuario);
     return this.http.post<AuthenticationResponse>(environment.urlAPI+ "/auth/register", usuario);
+  }
+
+  editarUsuario(usuario:UserCreacionDTO) :Observable<any>{
+    return this.http.put(environment.urlAPI + '/User', usuario);
   }
 
   isAuthenticated(){
@@ -61,21 +65,14 @@ export class UserService {
     return dataToken[field];
   }
 
-  obtenerUsuario(id: string): Observable<UserDTO> {
-    return this.http.get<UserDTO>(environment.urlAPI + id);
+  // CRUD
+
+  getUsuarios(): Observable<UsuarioDTO[]>{
+    return this.http.get<UsuarioDTO[]>(`${environment.urlAPI}/User`);
   }
 
-  actualizarUsuario(id:string, usuario:UserDTO) :Observable<UserDTO>{
-    return this.http.put<UserDTO>(environment.urlAPI + '/' + id, usuario);
-  }
-
-  actualizar(usuario: UserDTO){
-    this.actualizarFormulario.next(usuario);
-  }
-
-  obtenerUsuarios$():Observable<UserDTO>{
-    return this.actualizarFormulario.asObservable();
-  // ===================================     MAIKOL    ==========================
+  obtenerUsuario(id: string): Observable<UserCreacionDTO> {
+    return this.http.get<UserCreacionDTO>(environment.urlAPI + id);
   }
 
   //Trae la lista de los objetos
@@ -85,10 +82,6 @@ export class UserService {
         map(this.tranformarUsurarios)
       )
   } */
-
-  get refresh$() {
-    return this._refres$;
-  }
 
  /*  private tranformarUsurarios(respuesta: Mensaje): Usuarios[] {
     //metodo crea el

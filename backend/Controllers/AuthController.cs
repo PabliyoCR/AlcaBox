@@ -1,6 +1,8 @@
-﻿using backend.Models;
+﻿using backend.DTOs;
+using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -18,21 +20,23 @@ namespace backend.Controllers
         private IUserService _userService;
         private IMailService _mailService;
         private IConfiguration _configuration;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AuthController(IUserService userService, IMailService mailService, IConfiguration configuration)
+        public AuthController(IUserService userService, IMailService mailService, IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _userService = userService;
             _mailService = mailService;
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         // /api/auth/register
         [HttpPost("Register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody] UsuarioCreacionDTO usuarioCreacionDTO)
         {
             if (ModelState.IsValid)
             {
-                var result = await _userService.RegisterUserAsync(model);
+                var result = await _userService.RegisterUserAsync(usuarioCreacionDTO);
 
                 if (result.IsSuccess)
                     return Ok(result); // Status Code: 200 

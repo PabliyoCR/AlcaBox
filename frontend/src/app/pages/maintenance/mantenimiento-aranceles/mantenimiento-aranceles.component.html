@@ -1,0 +1,17 @@
+<div app-generic-table [data] = "{ genericDetail : 
+        { dataSource, 
+            infoToDisplay, 
+            displayCols 
+        }, genericForm : { 
+            genericFormGroup : arancelForm, 
+            controls 
+        } }"  [metadata] = "{
+            title : 'Arancel',
+            pk : {
+                name: 'arancelId',
+                type: 'number'
+            }
+        }"
+        (submitForm)="crearArancel($event)"
+        (deleteConfirmed)="eliminarArancel($event)"
+        ></div>

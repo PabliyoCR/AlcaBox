@@ -9,21 +9,21 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class HeroComponent implements OnInit {
 
-  constructor(public router : Router, private UserService : UserService) { }
+  constructor(public router : Router, private userService : UserService) { }
 
   ngOnInit(): void {
   }
 
   isAuthenticated(): boolean {
-    return this.UserService.isAuthenticated();
+    return this.userService.isAuthenticated();
   }
 
   isAuthorizated(roles : string[]){
-    return this.UserService.isAuthorizated(roles);
+    return this.userService.isAuthorizated(roles);
   }
 
   logOut(){
-    this.UserService.logOut();
+    this.userService.logOut();
   }
 
 }

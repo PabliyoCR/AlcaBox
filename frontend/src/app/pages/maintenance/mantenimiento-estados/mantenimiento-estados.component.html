@@ -1,0 +1,16 @@
+<div app-generic-table [data] = "{ genericDetail : { 
+        dataSource, 
+        infoToDisplay, 
+        displayCols 
+    }, genericForm : { 
+        genericFormGroup : estadoForm, 
+        controls 
+    } }" [metadata] = "{
+        title : 'Estado',
+        pk : {
+            name: 'estadoId',
+            type: 'number'
+        }
+    }"
+    (submitForm)="crearEstado($event)"
+    (deleteConfirmed)="eliminarEstado($event)"></div>

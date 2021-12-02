@@ -11,7 +11,7 @@ namespace backend.Models
     {
 
         [Key]
-        public int Estado_Id { get; set; }
+        public int EstadoId { get; set; }
 
         public string Nombre { get; set; }
     }

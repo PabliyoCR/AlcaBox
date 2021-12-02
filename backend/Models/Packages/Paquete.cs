@@ -11,14 +11,15 @@ namespace backend.Models
     public class Paquete
     {
         [Key]
-        public int Paquete_Id { get; set; }
+        public int PaqueteId { get; set; }
 
         //[Required]
         public int Tracking { get; set; }
 
+        
+        public string UsuarioId { get; set; }
         //[Required]
-        [ForeignKey("Usuarios")]
-
+        [ForeignKey(nameof(UsuarioId))]
         public ApplicationUser Usuario { get; set; }
 
         //[Required]
@@ -29,14 +30,18 @@ namespace backend.Models
         //[Required]
         public double Peso { get; set; }
 
-        [ForeignKey("Aranceles")]
+        
+        public int ArancelId { get; set; }
         //[Required]
+        [ForeignKey(nameof(ArancelId))]
         public Arancel Arancel { get; set; }
 
-
-        [ForeignKey("Estados")]
+        
+        public int EstadoId { get; set; }
         //[Required]
+        [ForeignKey(nameof(EstadoId))]
         public Estado Estado { get; set; }
+
         //[Required]
         public double Precio { get; set; }
 

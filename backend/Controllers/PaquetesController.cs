@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.DataAccess;
 using backend.Models;
-using backend.Utilities;
-using backend.DTOs;
+using Microsoft.AspNetCore.Identity;
 using AutoMapper;
+using backend.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace backend.Controllers
 {
@@ -18,82 +20,106 @@ namespace backend.Controllers
     public class PaquetesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
 
-        public PaquetesController(ApplicationDbContext context, IMapper mapper)
+        public PaquetesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
         }
 
         // GET: api/Paquetes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquete([FromQuery] PaginacionDTO paginacionDTO)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetes()
         {
-            //return await _context.Paquete.ToListAsync();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var roles_user = await _userManager.GetRolesAsync(user);
 
-            var queryable = _context.Paquete.AsQueryable();
-            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
-            var paquetes = await queryable.OrderBy(x => x.Paquete_Id).Paginar(paginacionDTO).ToListAsync();
+            List<Paquete> paquetes;
+            if (roles_user.Contains("Usuario"))
+            {
+                paquetes = await _context.Paquete.Where(paq => paq.UsuarioId == _userManager.GetUserId(User)).OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
+                return _mapper.Map<List<PaqueteDTO>>(paquetes);
+            }
+            else
+            {
+                paquetes = await _context.Paquete.OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
+            }
             return _mapper.Map<List<PaqueteDTO>>(paquetes);
         }
 
         // GET: api/Paquetes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Paquete>> GetPaquete(int id)
+        [HttpGet("{id}", Name = "GetPaquete")]
+        public async Task<ActionResult<PaqueteDTO>> GetPaquete(int id)
         {
-            var paquete = await _context.Paquete.FindAsync(id);
+            var paquete = await _context.Paquete.FirstOrDefaultAsync(x => x.PaqueteId == id);
 
             if (paquete == null)
             {
                 return NotFound();
             }
 
-            return paquete;
+            return _mapper.Map<PaqueteDTO>(paquete);
         }
+
+        [HttpGet("User/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetesUsuario(string id)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var paquetes = await _context.Paquete.Where(paq => paq.UsuarioId == id).OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
+            return _mapper.Map<List<PaqueteDTO>>(paquetes);
+        }
+
+        [HttpGet("Estados")]
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetesEstados([FromHeader] int[] estados)
+        {
+            var paquetes = await _context.Paquete.Where(paq => estados.Contains(paq.EstadoId)).OrderBy(paquete => paquete.Estado.Nombre).ToListAsync();
+            return _mapper.Map<List<PaqueteDTO>>(paquetes);
+        }
+
+        // POST: api/Paquetes
+        [HttpPost]
+        public async Task<ActionResult<PaqueteDTO>> PostPaquete(PaqueteCreacionDTO paqueteCreacionDTO)
+        {
+            var paquete = _mapper.Map<Paquete>(paqueteCreacionDTO);
+
+            _context.Add(paquete);
+            await _context.SaveChangesAsync();
+
+            var paqueteDTO = _mapper.Map<PaqueteDTO>(paquete);
+
+            return CreatedAtRoute("GetPaquete", new { id = paquete.PaqueteId }, paqueteDTO);
+        }
+
 
         // PUT: api/Paquetes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPaquete(int id, Paquete paquete)
+        [HttpPut]
+        public async Task<IActionResult> PutPaquete(PaqueteCreacionDTO paqueteCreacionDTO)
         {
-            if (id != paquete.Paquete_Id)
+            var existe = await _context.Paquete.AnyAsync(x => x.PaqueteId == paqueteCreacionDTO.PaqueteId);
+
+            if (!existe)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(paquete).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PaqueteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var paquete = _mapper.Map<Paquete>(paqueteCreacionDTO);
+  
+            _context.Update(paquete);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        // POST: api/Paquetes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Paquete>> PostPaquete(Paquete paquete)
-        {
-            _context.Paquete.Add(paquete);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPaquete", new { id = paquete.Paquete_Id }, paquete);
-        }
-
+       
         // DELETE: api/Paquetes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePaquete(int id)
@@ -112,7 +138,7 @@ namespace backend.Controllers
 
         private bool PaqueteExists(int id)
         {
-            return _context.Paquete.Any(e => e.Paquete_Id == id);
+            return _context.Paquete.Any(e => e.PaqueteId == id);
         }
     }
 }

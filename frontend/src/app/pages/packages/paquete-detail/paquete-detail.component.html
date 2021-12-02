@@ -1,0 +1,32 @@
+
+
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="detailPaqueteLabel">Paquete</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngIf="detail">
+        <div>{{detail.paqueteId}}</div>
+
+        <div>{{detail.descripcion}}</div>
+
+        <div>{{detail.usuario.cedula}}</div>
+        <div>{{detail.usuario.nombre}}</div>
+
+        <div>{{detail.fechaRegistro}}</div>
+
+        <div>{{detail.peso}}</div>
+
+        <div>{{detail.arancel.nombre}}</div>
+
+        <div>{{detail.estado.nombre}}</div>
+
+        <div>{{detail.precio}}</div>
+
+        <div>{{detail.tracking}}</div>
+
+    </ng-container>
+  </div>
+</div>
+

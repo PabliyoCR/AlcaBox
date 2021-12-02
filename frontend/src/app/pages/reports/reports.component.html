@@ -2,7 +2,66 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <p>reports works!</p>
+            <h3>Reportes</h3>
+            <div class="mb-3">
+                <b>Paquetería Asociada a Usuario</b>
+            </div>
+            <div class="mb-5">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Cédula de Usuario</mat-label>
+                    <input type="text" matInput [formControl]="userControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div class="d-inline w-100">
+                    {{getNombreUsuario()}}
+                </div>
+                <button class="btn btn-primary ms-5" (click)="reportePaquetesUsuario()">Generar Reporte</button>
+            </div>
+            <div class="mb-3">
+                <b>Reporte General Paquetería según Estado</b>
+            </div>
+            <div class="mb-5">
+                <mat-checkbox *ngFor="let estado of estadosPaquetes" class="reportePaqueteria me-5" color = "primary" [value]="estado.estadoId.toString()">{{estado.nombre}}</mat-checkbox>
+                <div>
+                    <button class="btn btn-primary ms-5 mt-3" (click)="reportePaquetesEstados()">Generar Reporte</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <b>Reporte Contable (Paquetería Facturada y Pendiente)</b>
+            </div>
+            <hr>
+            <h3>Bitácoras</h3>
+            <div class="mb-3">
+                <b>Ingresos y Salidad del Sistema</b>
+            </div>
+            <div class="mb-3">
+                <b>Movimientos de Usuario</b>
+            </div>
+
+            <!-- <div #reporte class="reporte"> -->
+            <div #reporte class="reporte" [hidden]="reporteOculto">
+                <img class="reporte__logo" src="assets/images/reporte/logo_gris.png" alt="">
+                <div #contenidoReporte *ngIf="reporteData">
+                    <div>
+                        <b>{{reporteData.titulo}}</b>
+                    </div>
+                    <hr>
+                    <div *ngFor="let registro of reporteData.data">
+                        <div *ngFor="let item of registro | keyvalue:onCompare">
+                            {{item.key}} : {{item.value}}
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <b>Creado:  {{reporteData.fecha}}</b>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
