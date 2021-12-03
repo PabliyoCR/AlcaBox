@@ -26,6 +26,7 @@ namespace backend.Utilities
 
             CreateMap<UsuarioCreacionDTO, ApplicationUser>();
             CreateMap<UsuarioEdicionDTO, ApplicationUser>();
+            CreateMap<IdentityUserLogin<string>, LoginLogDTO>();
 
             CreateMap<Paquete, PaqueteDTO>()
               .ForMember(paquete => paquete.Usuario, opciones => opciones.MapFrom(MapUsuarioPaquete))

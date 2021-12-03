@@ -139,6 +139,8 @@ namespace backend.Services
 
             string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
 
+            await _userManager.AddLoginAsync(user, new UserLoginInfo(DateTime.Now.ToString(), tokenAsString, user.Email));
+
             return new UserManagerResponse
             {
                 Message = tokenAsString,

@@ -83,6 +83,13 @@ export class ReportsComponent implements OnInit {
     });
   }
 
+  reporteIngresosSistema(){
+    this.http.get<any>(`${environment.urlAPI}/User/loginLogs`).subscribe(res => {
+      this.reporteData = {titulo :"Reporte Ingresos Al Sistema", data : res, fecha : new Date()};
+      this.imprimirReporte()
+    });
+  }
+
   displayFn(opt: FORM_OPT): string {
     return opt && opt.name ? opt.name : '';
   }
