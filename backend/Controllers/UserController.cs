@@ -68,7 +68,6 @@ namespace backend.Controllers
 
             applicationUser = _mapper.Map<UsuarioEdicionDTO, ApplicationUser>(usuarioEdicionDTO, applicationUser);
 
-
             var roles = await _userManager.GetRolesAsync(applicationUser);
             await _userManager.RemoveFromRolesAsync(applicationUser, roles.ToArray());
             await _userManager.AddToRoleAsync(applicationUser, usuarioEdicionDTO.roleId);
