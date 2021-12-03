@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UserCreacionDTO } from 'src/app/shared/models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import { AuthenticationResponse } from 'src/app/shared/models/DTOs/authenticationDTOs/security';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -22,11 +23,13 @@ export class SignupComponent implements OnInit {
       segundoApellido: [null, Validators.required],
       tipoCedula: [null, Validators.required],
       genero: [null, Validators.required],
-      recibeOfertas: [null, Validators.required],
+      direccion : [null, Validators.required],
+      recibeOfertas: [true, Validators.required],
       tipoCuenta: [null, Validators.required],
       email: [null, Validators.required],
-      password: [null, Validators.required],
-      confirmPassword: [null, Validators.required]
+      password: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
+      aceptaTerminos: [false, Validators.required]
     });
   }
 
@@ -34,22 +37,22 @@ export class SignupComponent implements OnInit {
   }
 
   signup(){
-    const user: UserCreacionDTO = {
-          cedula : (document.getElementById("cedula") as HTMLInputElement).value,
-          email: (document.getElementById("email") as HTMLInputElement).value,
-          password: (document.getElementById("password") as HTMLInputElement).value,
-          confirmPassword: (document.getElementById("confirm_password") as HTMLInputElement).value,
-          nombre: (document.getElementById("nombre") as HTMLInputElement).value,
-          aceptaTerminos :  true,
-          primerApellido : (document.getElementById("primerApellido") as HTMLInputElement).value,
-          segundoApellido : (document.getElementById("segundoApellido") as HTMLInputElement).value,
-          tipoCedula : 1,
-          genero : 1,
-          direccion : (document.getElementById("direccion") as HTMLInputElement).value,
-          recibeOfertas :  true,
-          tipoCuenta : 1,
-          roleId : "Usuario"
-        }
+    console.log(this.usuarioForm.value);
+
+    if(this.usuarioForm.invalid){
+      this.usuarioForm.markAllAsTouched()
+      return
+    }
+
+    if(!this.usuarioForm.get('aceptaTerminos')?.value){
+      Swal.fire({
+        icon: 'error',
+        title: 'Debes aceptar los términos y condiciones para utilizar el sitio',
+      })
+      return
+    }
+
+    const user: UserCreacionDTO = this.usuarioForm.value
         
         this.userService.guardarUsuario(user).subscribe(
           (res: AuthenticationResponse) => {
@@ -58,7 +61,22 @@ export class SignupComponent implements OnInit {
             this.router.navigateByUrl('login');
           },
           err => {
+            let html = ''
+            if(err.error.errors){
+              html = '<ul>';
+              err.error.errors.forEach((error : any) => {
+                html += `<li>${error}</li>`;
+              });
+              html += '</ul>';
+            }
+            Swal.fire({
+              icon: 'error',
+              title: err.error.message,
+              html
+            })
           }
         );
   }
+
+  
 }

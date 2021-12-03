@@ -144,3 +144,5 @@ C:\Users\jimen\Documents\GitHub\AlcaBox\backend\obj\Debug\net5.0\ref\backend.dll
 C:\Users\jimen\Documents\GitHub\AlcaBox\backend\obj\Debug\net5.0\backend.pdb
 C:\Users\jimen\Documents\GitHub\AlcaBox\backend\obj\Debug\net5.0\backend.genruntimeconfig.cache
 C:\Users\jimen\Documents\GitHub\AlcaBox\backend\obj\Debug\net5.0\backend.csproj.AssemblyReference.cache
+C:\Users\jimen\Documents\GitHub\AlcaBox\backend\bin\Debug\net5.0\XLocalizer.dll
+C:\Users\jimen\Documents\GitHub\AlcaBox\backend\bin\Debug\net5.0\XLocalizer.Translate.dll

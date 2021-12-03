@@ -1,0 +1,11 @@
+@import "src/assets/scss/custom";
+
+.text-danger{
+    padding-left: toREM(20);
+    font-size: toREM(12);
+    margin-top: toREM(-10);
+}
+
+.form-group{
+    margin: toREM(20) 0;
+}

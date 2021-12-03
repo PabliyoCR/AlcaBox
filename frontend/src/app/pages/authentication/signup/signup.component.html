@@ -1,63 +1,119 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-4 text-end mx-auto">
+            <div class="col-8 mx-auto">
                 <form [formGroup] ="usuarioForm">
-                    
-                     <input type="text" class="form-control border-3 my-3" id="nombre" name="nombre"
-                    placeholder="Nombre" formControlName="nombre" />
-
-                    <input type="text" class="form-control border-3 my-3" id="primerApellido" name="primerApellido"
-                    placeholder="Primer Apellido" formControlName="primerApellido" />
-
-                    <input type="text" class="form-control border-3 my-3" id="segundoApellido" name="primerApellido"
-                    placeholder="Segundo Apellido" formControlName="segundoApellido" />
-
-                     <input type="text" class="form-control border-3 my-3" id="cedula" name="cedula"
-                    placeholder="Cedula" formControlName="cedula" />
-
-                    <label for="tipoCedula">Tipo de Identificacion</label>
-                    <select class="form-control border-3 my-3" name="tipoCedula" id="tipoCedula">
-                        <option value=1>Cedula</option>
-                        <option value=2>Pasaporte</option>
-                    </select>
-
-                    <label for="tipoCedula">Genero</label>
-                    <select class="form-control border-3 my-3" name="tipoCedula" id="tipoCedula">
-                        <option value=1>Masculino</option>
-                        <option value=2>Femenino</option>
-                    </select>
-
-                    <textarea class="form-control border-3 my-3" name="direccion" id="direccion" cols="30" rows="10" placeholder="Dirección"></textarea>
-
-                    <label for="tipoCedula">Tipo de Cuenta</label>
-                    <select class="form-control border-3 my-3" name="tipoCuenta" id="tipoCuenta">
-                        <option value=1>Personal</option>
-                        <option value=2>Empresarial</option>
-                    </select>
-
-                    <input type="text" class="form-control border-3 my-3" id="email" name="email"
-                    placeholder="Email" formControlName="email" />
-
-                    <input type="password" class="form-control border-3 my-3" id="password" name="password"
-                    placeholder="Contraseña" formControlName="password" />
-                    <input type="password" class="form-control border-3 my-3" id="confirm_password" name="confirm_password"
-                    placeholder="Confirmar Contraseña" formControlName="confirmPassword" />
-
-                    <div class="form-check text-end mb-4">
-                        <input class="form-check-input" type="checkbox" value="" id="recibe Ofertas">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Recibe Ofertas
-                        </label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-3" id="nombre" name="nombre"
+                                placeholder="Nombre" formControlName="nombre" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('nombre')?.touched && usuarioForm.get('nombre')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-3" id="primerApellido" name="primerApellido"
+                                placeholder="Primer Apellido" formControlName="primerApellido" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('primerApellido')?.touched && usuarioForm.get('primerApellido')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-3" id="segundoApellido" name="segundoApellido" placeholder="Segundo Apellido" formControlName="segundoApellido" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('segundoApellido')?.touched && usuarioForm.get('segundoApellido')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-3" id="cedula" name="cedula" placeholder="Cedula" formControlName="cedula" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('cedula')?.touched && usuarioForm.get('cedula')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                             <div class="form-group">
+                                <label for="tipoCedula">Tipo de Identificacion</label>
+                                <select class="form-control border-3" name="tipoCedula" id="tipoCedula" formControlName="tipoCedula">
+                                    <option [ngValue]=1>Cedula</option>
+                                    <option [ngValue]=2>Pasaporte</option>
+                                </select>
+                                <span class="text-danger" *ngIf="usuarioForm.get('tipoCedula')?.touched && usuarioForm.get('tipoCedula')?.errors">
+                                    Debes escoger una opción
+                                </span>
+                            </div>
+                             <div class="form-group">
+                                <label for="genero">Genero</label>
+                                <select class="form-control border-3" name="genero" id="genero" formControlName="genero">
+                                    <option [ngValue]=1>Masculino</option>
+                                    <option [ngValue]=2>Femenino</option>
+                                </select>
+                                <span class="text-danger" *ngIf="usuarioForm.get('genero')?.touched && usuarioForm.get('genero')?.errors">
+                                    Debes escoger una opción
+                                </span>
+                            </div>
+                             <div class="form-group">
+                                <textarea class="form-control border-3" name="direccion" id="direccion" cols="30" rows="10" placeholder="Dirección" formControlName="direccion"></textarea>
+                                <span class="text-danger" *ngIf="usuarioForm.get('direccion')?.touched && usuarioForm.get('direccion')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col">
+                             <div class="form-group">
+                                <label for="tipoCuenta">Tipo de Cuenta</label>
+                                <select class="form-control border-3" name="tipoCuenta" id="tipoCuenta" formControlName="tipoCuenta">
+                                    <option [ngValue]=1>Personal</option>
+                                    <option [ngValue]=2>Empresarial</option>
+                                </select>
+                                <span class="text-danger" *ngIf="usuarioForm.get('tipoCuenta')?.touched && usuarioForm.get('tipoCuenta')?.errors">
+                                    Debes escoger una opción
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-3" id="email" name="email"
+                                placeholder="Email" formControlName="email" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('email')?.touched && usuarioForm.get('email')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control border-3" id="password" name="password"
+                                placeholder="Contraseña" formControlName="password" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('password')?.touched && usuarioForm.get('password')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                            <div>
+                                La Contraseña debe contener:
+                                <ul>
+                                    <li>Al menos 8 caracteres"</li>
+                                    <li>Al menos un caracter no alfanumérico</li>
+                                    <li>Al menos un dígito</li>
+                                    <li>Al menos una letra mayúscula y otra minúscula</li>
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control border-3" id="confirm_password" name="confirm_password"
+                                placeholder="Confirmar Contraseña" formControlName="confirmPassword" />
+                                <span class="text-danger" *ngIf="usuarioForm.get('confirmPassword')?.touched && usuarioForm.get('confirmPassword')?.errors">
+                                    Debes rellenar este espacio
+                                </span>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="recibeOfertas" formControlName="recibeOfertas">
+                                <label class="form-check-label" for="recibeOfertas">
+                                    Recibe Ofertas
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="aceptaTerminos" formControlName="aceptaTerminos">
+                                <label class="form-check-label" for="aceptaTerminos">
+                                    Acepta Términos y Condiciones
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" type="submit" (click)="signup()">Registrarse</button>
+                        </div>
                     </div>
-                    <div class="form-check text-end mb-4">
-                        <input class="form-check-input" type="checkbox" value="" id="aceptaTerminos">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Acepta Términos y Condiciones
-                        </label>
-                    </div>
-
-                    <button class="btn btn-primary" type="submit" (click)="signup()">Registrarse</button>
                 </form> 
             </div>
         </div>

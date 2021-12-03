@@ -55,7 +55,7 @@ namespace backend.Services
             if (usuarioCreacionDTO.password != usuarioCreacionDTO.confirmPassword)
                 return new UserManagerResponse
                 {
-                    Message = "Confirm password doesn't match the password",
+                    Message = "La contraseña y la confirmación no coinciden",
                     IsSuccess = false,
                 };
 
@@ -89,7 +89,7 @@ namespace backend.Services
 
             return new UserManagerResponse
             {
-                Message = "User did not create",
+                Message = "El Usuario No pudo ser Creado",
                 IsSuccess = false,
                 Errors = result.Errors.Select(e => e.Description)
             };
@@ -104,7 +104,7 @@ namespace backend.Services
             {
                 return new UserManagerResponse
                 {
-                    Message = "There is no user with that Email address",
+                    Message = "No existe el usuario con el correo dado",
                     IsSuccess = false,
                 };
             }
@@ -114,7 +114,7 @@ namespace backend.Services
             if (!result)
                 return new UserManagerResponse
                 {
-                    Message = "Invalid password",
+                    Message = "Contraseña Incorrecta",
                     IsSuccess = false,
                 };
 
@@ -154,7 +154,7 @@ namespace backend.Services
                 return new UserManagerResponse
                 {
                     IsSuccess = false,
-                    Message = "User not found"
+                    Message = "Usuario No Encontrado"
                 };
 
             var decodedToken = WebEncoders.Base64UrlDecode(token);
@@ -165,14 +165,14 @@ namespace backend.Services
             if (result.Succeeded)
                 return new UserManagerResponse
                 {
-                    Message = "Email confirmed successfully!",
+                    Message = "Email Confirmado Exitosamente!",
                     IsSuccess = true,
                 };
 
             return new UserManagerResponse
             {
                 IsSuccess = false,
-                Message = "Email did not confirm",
+                Message = "Email no Confirmado",
                 Errors = result.Errors.Select(e => e.Description)
             };
         }
@@ -184,7 +184,7 @@ namespace backend.Services
                 return new UserManagerResponse
                 {
                     IsSuccess = false,
-                    Message = "No user associated with email",
+                    Message = "No hay un usuario asociado a este email",
                 };
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);

@@ -2227,6 +2227,30 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "XLocalizer/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "XLocalizer.Translate": "1.0.0"
+        },
+        "compile": {
+          "lib/net5.0/XLocalizer.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/XLocalizer.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "XLocalizer.Translate/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/XLocalizer.Translate.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/XLocalizer.Translate.dll": {}
+        }
       }
     }
   },
@@ -7665,6 +7689,49 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "XLocalizer/1.0.3": {
+      "sha512": "f+LI0iZ/BZZhdhKdtJU/hJKnekuHt0gsd4r7DmRY3WMgTnfjrrFI1pIH26pKDzF21z5Fv8U+gQSU19BbB9BD2Q==",
+      "type": "package",
+      "path": "xlocalizer/1.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net5.0/XLocalizer.dll",
+        "lib/net5.0/XLocalizer.xml",
+        "lib/netcoreapp2.0/XLocalizer.dll",
+        "lib/netcoreapp2.0/XLocalizer.xml",
+        "lib/netcoreapp2.1/XLocalizer.dll",
+        "lib/netcoreapp2.1/XLocalizer.xml",
+        "lib/netcoreapp2.2/XLocalizer.dll",
+        "lib/netcoreapp2.2/XLocalizer.xml",
+        "lib/netcoreapp3.0/XLocalizer.dll",
+        "lib/netcoreapp3.0/XLocalizer.xml",
+        "lib/netcoreapp3.1/XLocalizer.dll",
+        "lib/netcoreapp3.1/XLocalizer.xml",
+        "license.txt",
+        "xlocalizer.1.0.3.nupkg.sha512",
+        "xlocalizer.nuspec"
+      ]
+    },
+    "XLocalizer.Translate/1.0.0": {
+      "sha512": "lI9gt7UbsXi4h/2RutUen/yR07fMO+jHsTubzKh4SrYjHvzkMBg0VNGnIsMHEpFoD3d/8meiWCUHhQxnl5/VKQ==",
+      "type": "package",
+      "path": "xlocalizer.translate/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.txt",
+        "icon.png",
+        "lib/netstandard2.0/XLocalizer.Translate.dll",
+        "lib/netstandard2.0/XLocalizer.Translate.xml",
+        "lib/netstandard2.1/XLocalizer.Translate.dll",
+        "lib/netstandard2.1/XLocalizer.Translate.xml",
+        "license.txt",
+        "xlocalizer.translate.1.0.0.nupkg.sha512",
+        "xlocalizer.translate.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -7680,7 +7747,8 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10",
       "SendGrid >= 9.24.4",
-      "Swashbuckle.AspNetCore >= 5.6.3"
+      "Swashbuckle.AspNetCore >= 5.6.3",
+      "XLocalizer >= 1.0.3"
     ]
   },
   "packageFolders": {
@@ -7781,6 +7849,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[5.6.3, )"
+          },
+          "XLocalizer": {
+            "target": "Package",
+            "version": "[1.0.3, )"
           }
         },
         "imports": [

@@ -56,12 +56,13 @@ namespace backend
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequiredLength = 8;
+                options.Password.RequireUppercase = true;
                 //options.SignIn.RequireConfirmedAccount = true
             }).AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-                
 
+            services.AddScoped<IdentityErrorDescriber, CustomIdentityErrorDescriber>();
 
             //Autenticacion de usuarios
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

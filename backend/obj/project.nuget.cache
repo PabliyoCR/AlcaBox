@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FDoK+ClpPWCk6U4GCjPeeOXVw0ANVUBX7sEH/J5PjmlSUrOjDAN8DMmrrhUkPtU8HBAkq455/NhX2aOju5fWEQ==",
+  "dgSpecHash": "qwND1WycxBs7E2Wa9lClXgcytrwVlz9szB25of7xEIs5rUhlEiyoqRHTKlkEfAODh0K+enS7o5k42ZunsdD3jQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\jimen\\Documents\\GitHub\\AlcaBox\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -145,7 +145,9 @@
     "C:\\Users\\jimen\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\jimen\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\jimen\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\jimen\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\jimen\\.nuget\\packages\\xlocalizer\\1.0.3\\xlocalizer.1.0.3.nupkg.sha512",
+    "C:\\Users\\jimen\\.nuget\\packages\\xlocalizer.translate\\1.0.0\\xlocalizer.translate.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }

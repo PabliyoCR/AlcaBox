@@ -44,7 +44,7 @@ namespace backend.Controllers
                 return BadRequest(result);
             }
 
-            return BadRequest("Some properties are not valid"); // Status code: 400
+            return BadRequest("Algunos datos ingresados no son válidos"); // Status code: 400
         }
 
         // /api/auth/login
