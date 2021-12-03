@@ -15,7 +15,7 @@
                 <div class="hero__links px-5">
                     <a class="hero__links__link text-uppercase" routerLink= "" routerLinkActive="router-link-active">inicio</a>
                     <a *ngIf="isAuthenticated()" class="hero__links__link text-uppercase" routerLink= "packages" routerLinkActive="router-link-active">paqueteria</a>
-                    <a *ngIf="isAuthenticated() && isAuthorizated(['Admin'])" class="hero__links__link text-uppercase" routerLink= "maintenance" routerLinkActive="router-link-active">mantenimiento</a>
+                    <a *ngIf="isAuthenticated() && isAuthorizated(['Admin', 'Funcionario'])" class="hero__links__link text-uppercase" routerLink= "maintenance" routerLinkActive="router-link-active">mantenimiento</a>
                     <a *ngIf="isAuthenticated() && isAuthorizated(['Admin','Funcionario'])" class="hero__links__link text-uppercase" routerLink= "reports" routerLinkActive="router-link-active">reportes</a>
                     <a class="hero__links__link text-uppercase" routerLink= "about" routerLinkActive="router-link-active">acerca de</a>
                     <a class="hero__links__link text-uppercase" routerLink= "help" routerLinkActive="router-link-active">ayuda</a>

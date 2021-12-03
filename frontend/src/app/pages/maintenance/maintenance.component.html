@@ -1,8 +1,9 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+            <mat-expansion-panel *ngIf="isAuthorizated(['Admin'])"
+                    (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Mantenimiento de Usuarios

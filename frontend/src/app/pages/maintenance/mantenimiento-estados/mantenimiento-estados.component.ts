@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EstadoDTO } from 'src/app/shared/models/DTOs/PaqueteDTO.model';
 import { FORM } from 'src/app/shared/models/Form.model';
 import { EstadosService } from 'src/app/shared/services/estados.service';
+import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
   selector: 'div[app-mantenimiento-estados]',
@@ -28,7 +29,7 @@ export class MantenimientoEstadosComponent implements OnInit {
     { id : "nombre", type : "text", placeholder: "Nombre Estado"},
   ]
 
-  constructor(private estadosService : EstadosService, private fb : FormBuilder, private estadoService : EstadosService) {
+  constructor(private estadosService : EstadosService, private fb : FormBuilder, private estadoService : EstadosService, private formService : FormService) {
     this.estadoForm = this.fb.group({
       estadoId: [{ value: 0, disabled: true }, Validators.required],
       nombre: [null, Validators.required]
@@ -50,10 +51,12 @@ export class MantenimientoEstadosComponent implements OnInit {
     if(!res.edit){
       this.estadoService.crearEstado(res.formValue).subscribe((res : any) => {
         this.getEstados()
+        this.formService.successToast()
       })
     }else{
       this.estadoService.editarEstado(res.formValue).subscribe((res : any) => {
         this.getEstados()
+        this.formService.successToast()
       })
     }
   }

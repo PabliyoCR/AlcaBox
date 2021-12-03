@@ -1,6 +1,6 @@
 <div class="text-end">
     <!-- <button type="button" class="btn btn-primary" (click)="wipePaqueteForm()" data-bs-toggle="modal" data-bs-target="#formPaquete">Crear Paquete</button> -->
-    <button type="button" class="btn btn-primary" (click)="openFormCreate()">Crear {{metadata.title}}</button>
+    <button *ngIf="metadata.title != 'Usuario'" type="button" class="btn btn-primary my-2" (click)="openFormCreate()">Crear {{metadata.title}}</button>
 </div>
 
 <!-- <form style="display: flex" [formGroup]="filtrosControl">

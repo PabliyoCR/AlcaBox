@@ -104,6 +104,7 @@ export class FormularioPaqueteComponent implements OnInit {
       this.packageService.crearPaquete(paquete).subscribe( res => {
         (document.getElementById('closeModalBtn') as HTMLButtonElement).click()
         this.updatePaquetesEvent.emit()
+        this.formService.successToast()
         /* var myModal = new bootstrap.Modal(this.formPaquete.nativeElement, { keyboard: false })
         myModal.hide() */
       })
@@ -111,6 +112,7 @@ export class FormularioPaqueteComponent implements OnInit {
       this.packageService.actualizarPaquete(paquete).subscribe( res => {
         (document.getElementById('closeModalBtn') as HTMLButtonElement).click()
         this.updatePaquetesEvent.emit()
+        this.formService.successToast()
       })
     }
   }

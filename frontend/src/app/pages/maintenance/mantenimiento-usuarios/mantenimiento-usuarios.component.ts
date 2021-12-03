@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioDTO } from 'src/app/shared/models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import { AuthenticationResponse } from 'src/app/shared/models/DTOs/authenticationDTOs/security';
 import { FORM } from 'src/app/shared/models/Form.model';
+import { FormService } from 'src/app/shared/services/form.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -48,7 +49,7 @@ export class MantenimientoUsuariosComponent implements OnInit {
     { id : "roleId", type : "select", placeholder: "Role", options : [{name : "usuario", value : "Usuario", display : "Usuario"}, {name :"funcionario", value : "Funcionario", display : "Funcionario"}, {name :"admin", value : "Admin", display : "Admin"}]},
   ]
 
-  constructor(private userService : UserService, private fb : FormBuilder) { 
+  constructor(private userService : UserService, private fb : FormBuilder, private formService : FormService) { 
     this.usuarioForm = this.fb.group({
       id: [{ value: 0, disabled: true }, Validators.required],
       nombre: [null, Validators.required],
@@ -84,6 +85,7 @@ export class MantenimientoUsuariosComponent implements OnInit {
     }else{
       this.userService.editarUsuario(res.formValue).subscribe((res : any) => {
         this.getUsuarios()
+        this.formService.successToast()
       })
     }
   }

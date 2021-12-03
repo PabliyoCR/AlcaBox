@@ -271,10 +271,10 @@ namespace backend.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "cedula", "direccion", "genero", "nombre", "primerApellido", "recibeOfertas", "segundoApellido", "tipoCedula", "tipoCuenta" },
                 values: new object[,]
                 {
-                    { "432e0b12-6f62-4a9e-8f77-7e4c2440aa8f", 0, "330983d8-39c4-497a-a0bf-b5be751c189a", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEHHysBNJsqz26DN7/oUDkt+mU0ZXMCTD8fSquZG9FhKl37FOugpz6Dp50hCKzUIIog==", null, false, "00ad4e9a-3230-4fab-9c19-2cbd1ebca9f6", false, "Admin", "11111111", "Direcion Admin", 1, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
-                    { "dc5214ae-d794-4da1-a4b8-4c32883a026e", 0, "e2af34ab-a66e-4c46-9f6c-648b966cd61d", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAENLtbroaBVGLd8PplJXprnZJ9UMQts3yYYn9GH6ojTlxhqsZ3Ot9qrT8yT7kAhxs1Q==", null, false, "13d73cdc-26f5-496c-8758-1b695b10c83b", false, "Billy", "87654321", "Direcion Funcionario", 1, "Billy", "H", false, "", 1, 1 },
-                    { "0414ef00-51f7-4cc5-aae8-b783ad4f3769", 0, "65671a1a-9ff5-4fac-a7e2-5ec8fe1c255d", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEGP0753CNzZD3cy1MY+KpGQL8v8Il6UsArn0WKbiFc86VnFkTiAr4VWxP5gbreXakQ==", null, false, "ff8384df-9221-443d-9880-5cf9e78bb5bf", false, "Pablo", "12345678", "Direcion Usuario", 1, "Pablo J.", "J", true, "", 1, 1 },
-                    { "51596782-b6e5-43de-9a9b-0087a57ec613", 0, "1764921b-c157-448c-b791-a45d3c0b4479", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEJ1eyj9nEtBMbk26vR0TFTSqg2/eO04M7rBh5wp7f3KsswKFaYPpx+dH2tqxBXa/Jg==", null, false, "43149d2d-5c29-4178-a302-762b52c1eb95", false, "Bot", "55555555", "Direcion Bot", 1, "Bot R.", "B", false, "", 1, 1 }
+                    { "2d9c5d9f-cf3d-4399-8ad4-c24d89dfeceb", 0, "59182ec0-e6a2-4cdd-918c-754062486332", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEJT7ZxCnYiYnzJX0TTMtM3BUbbzxT2aW0aDiLRuA1nJaiyegqZJEJZ6zTs4itXGYgg==", null, false, "307fae9f-5620-47cb-a41a-f06d9b242f02", false, "Admin", "11111111", "Direcion Admin", 1, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
+                    { "cc48dae0-c28d-4f74-9a70-f8f8ad51b3ca", 0, "d9b12d85-6fe0-463a-9dbb-397e065c9f60", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEEzttN82iwZabhv1gnMxEgdPmoULWT15GyzR1V6adIYLHN/0DVzK0kEEzy1Y59Xnrw==", null, false, "13512aac-7a52-4d1a-bc6b-f8b36142f6d6", false, "Billy", "87654321", "Direcion Funcionario", 1, "Billy", "H", false, "", 1, 1 },
+                    { "d13f575e-ad9f-40a4-8a7c-b3592b632d93", 0, "0d23b9c4-47a5-4b9b-87b8-15d8742d9c6a", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAENUcJjOFvU28eVr7WP5KC1WMPmgQZ5l576LyLCS9MLYrNAaSfUVsgLXBAFeUW1Xh7w==", null, false, "243e1671-39a7-4ecc-9e27-4c8bffdbe3a5", false, "Pablo", "12345678", "Direcion Usuario", 1, "Pablo J.", "J", true, "", 1, 1 },
+                    { "c9c337b7-f05a-46d6-a898-b981521e1414", 0, "8240407c-c725-4d19-8a80-f05cb82f7247", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEFnee/RNDAMxnAyXr6zrYpzG5Kqzg3otKSFbpUuIEyhek9Q+sn0aVMU4Y/LcnZ+Grg==", null, false, "33f36da9-b742-4c76-b61a-9af0770e811a", false, "Bot", "55555555", "Direcion Bot", 1, "Bot R.", "B", false, "", 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -298,10 +298,10 @@ namespace backend.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "Admin", "432e0b12-6f62-4a9e-8f77-7e4c2440aa8f" },
-                    { "Funcionario", "dc5214ae-d794-4da1-a4b8-4c32883a026e" },
-                    { "Usuario", "0414ef00-51f7-4cc5-aae8-b783ad4f3769" },
-                    { "Usuario", "51596782-b6e5-43de-9a9b-0087a57ec613" }
+                    { "Admin", "2d9c5d9f-cf3d-4399-8ad4-c24d89dfeceb" },
+                    { "Funcionario", "cc48dae0-c28d-4f74-9a70-f8f8ad51b3ca" },
+                    { "Usuario", "d13f575e-ad9f-40a4-8a7c-b3592b632d93" },
+                    { "Usuario", "c9c337b7-f05a-46d6-a898-b981521e1414" }
                 });
 
             migrationBuilder.CreateIndex(

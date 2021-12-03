@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ArancelDTO } from 'src/app/shared/models/DTOs/PaqueteDTO.model';
 import { FORM } from 'src/app/shared/models/Form.model';
 import { ArancelesService } from 'src/app/shared/services/aranceles.service';
+import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
   selector: 'div[app-mantenimiento-aranceles]',
@@ -28,7 +29,7 @@ export class MantenimientoArancelesComponent implements OnInit {
     { id : "nombre", type : "text", placeholder: "Nombre Arancel"},
   ]
 
-  constructor(private arancelesService : ArancelesService, private fb : FormBuilder, private arancelService : ArancelesService) { 
+  constructor(private arancelesService : ArancelesService, private fb : FormBuilder, private arancelService : ArancelesService, private formService : FormService) { 
     this.arancelForm = this.fb.group({
       arancelId: [{ value: 0, disabled: true }, Validators.required],
       nombre: [null, Validators.required]
@@ -50,10 +51,12 @@ export class MantenimientoArancelesComponent implements OnInit {
     if(!res.edit){
       this.arancelService.crearArancel(res.formValue).subscribe((res : any) => {
         this.getAranceles()
+        this.formService.successToast()
       })
     }else{
       this.arancelService.editarArancel(res.formValue).subscribe((res : any) => {
         this.getAranceles()
+        this.formService.successToast()
       })
     }
   }

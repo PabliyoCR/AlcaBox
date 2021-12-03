@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 import { UsuarioDTO } from '../models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import { PaqueteDTO } from '../models/DTOs/PaqueteDTO.model';
 import { FORM_OPT } from '../models/Form.model';
@@ -39,5 +40,24 @@ export class FormService {
 
   wipeForm(){
     this.formCreateSubject.next()
+  }
+
+  successToast(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-start',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Guardado con Éxito'
+    })
   }
 }

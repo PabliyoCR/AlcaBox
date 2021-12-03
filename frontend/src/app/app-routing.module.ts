@@ -42,7 +42,7 @@ const routes: Routes = [
     path : 'maintenance',
     component : MaintenanceComponent,
     loadChildren : () => import('./pages/maintenance/maintenance.module').then(m => m.MaintenanceModule),
-    canActivate:[AuthenticationGuard, AdminAuthorizationGuard]
+    canActivate:[AuthenticationGuard, FouncionarioAuthorizationGuard]
   },
   {
     path : 'about',
