@@ -56,6 +56,14 @@ namespace backend.Controllers
             return _mapper.Map<List<UsuarioDTO>>(usuarios);
         }
 
+        [HttpGet("loginLogs")]
+        public async Task<ActionResult<IEnumerable<LoginLogDTO>>> GetLoginLogs()
+        {
+            var logins = await _context.UserLogins.ToListAsync();
+            logins.Reverse();
+            return _mapper.Map<List<LoginLogDTO>>(logins);
+        }
+
         [HttpPut]
         public async Task<IActionResult> actualizarUsuario(UsuarioEdicionDTO usuarioEdicionDTO)
         {
