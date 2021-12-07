@@ -85,7 +85,7 @@ export class MantenimientoUsuariosComponent implements OnInit {
     }else{
       this.userService.editarUsuario(res.formValue).subscribe((res : any) => {
         this.getUsuarios()
-        this.formService.successToast()
+        this.formService.successToast("Guardado Exitósamente", 'bottom-start')
       })
     }
   }

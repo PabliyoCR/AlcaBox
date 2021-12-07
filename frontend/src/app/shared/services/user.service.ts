@@ -135,6 +135,8 @@ export class UserService {
     let decoded = JSON.parse(JSON.stringify(jwt_decode(token!)));
     let perfilU : IPerfilUsuaio = decoded;
 
+    console.log(perfilU);
+
     return perfilU
   }
 }

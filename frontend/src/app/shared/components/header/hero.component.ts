@@ -24,6 +24,7 @@ export class HeroComponent implements OnInit {
 
   logOut(){
     this.userService.logOut();
+    this.router.navigateByUrl('login');
   }
 
 }

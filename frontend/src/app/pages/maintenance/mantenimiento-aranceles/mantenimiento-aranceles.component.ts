@@ -29,7 +29,7 @@ export class MantenimientoArancelesComponent implements OnInit {
     { id : "nombre", type : "text", placeholder: "Nombre Arancel"},
   ]
 
-  constructor(private arancelesService : ArancelesService, private fb : FormBuilder, private arancelService : ArancelesService, private formService : FormService) { 
+  constructor(private arancelesService : ArancelesService, private fb : FormBuilder, private formService : FormService) { 
     this.arancelForm = this.fb.group({
       arancelId: [{ value: 0, disabled: true }, Validators.required],
       nombre: [null, Validators.required]
@@ -49,20 +49,20 @@ export class MantenimientoArancelesComponent implements OnInit {
 
   crearArancel(res : any){
     if(!res.edit){
-      this.arancelService.crearArancel(res.formValue).subscribe((res : any) => {
+      this.arancelesService.crearArancel(res.formValue).subscribe((res : any) => {
         this.getAranceles()
-        this.formService.successToast()
+        this.formService.successToast("Guardado Exitósamente", 'bottom-start')
       })
     }else{
-      this.arancelService.editarArancel(res.formValue).subscribe((res : any) => {
+      this.arancelesService.editarArancel(res.formValue).subscribe((res : any) => {
         this.getAranceles()
-        this.formService.successToast()
+        this.formService.successToast("Guardado Exitósamente", 'bottom-start')
       })
     }
   }
 
   eliminarArancel(pk : number){
-    this.arancelService.eliminarArancel(pk).subscribe((res : any) => {
+    this.arancelesService.eliminarArancel(pk).subscribe((res : any) => {
       this.getAranceles()
     })
   }

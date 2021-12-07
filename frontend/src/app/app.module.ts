@@ -21,6 +21,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MatNativeDateModule,
     MatDialogModule,
     AppRoutingModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxCaptchaModule
   ],
   providers: [
     UserService,
@@ -52,7 +55,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
       provide:HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi:true
-    }
+    }, 
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

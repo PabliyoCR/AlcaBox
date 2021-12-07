@@ -167,7 +167,7 @@ namespace backend.Services
             if (result.Succeeded)
                 return new UserManagerResponse
                 {
-                    Message = "Email Confirmado Exitosamente!",
+                    Message = "Email Confirmado Exitósamente!",
                     IsSuccess = true,
                 };
 

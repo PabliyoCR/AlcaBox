@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/09e609a4-cdb4-4070-9032-2d1ac6884264/resourceGroups/ALCA_GROUP/providers/Microsoft.Web/sites/alcabox",
+    "appService.deploySubpath": "backend\\bin\\Release\\net5.0\\publish"
+}

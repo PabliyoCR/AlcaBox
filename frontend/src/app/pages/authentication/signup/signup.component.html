@@ -110,6 +110,9 @@
                                 <label class="form-check-label" for="aceptaTerminos">
                                     Acepta Términos y Condiciones
                                 </label>
+                                <div class="mt-4">
+                                    <ngx-recaptcha2 #captchaElem  [siteKey]="siteKey" formControlName="recaptcha"></ngx-recaptcha2>
+                                </div>
                             </div>
                             <button class="btn btn-primary" type="submit" (click)="signup()">Registrarse</button>
                         </div>

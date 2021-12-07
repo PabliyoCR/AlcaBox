@@ -39,7 +39,6 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             // Mapeo Entidades
-            //services.AddAutoMapper(typeof(AutoMapperProfiles));
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AutoMapperProfiles(provider.GetService<ApplicationDbContext>(), provider.GetService<UserManager<ApplicationUser>>()));
@@ -135,6 +134,11 @@ namespace backend
             }
 
             app.UseHttpsRedirection();
+
+            // Servir archivos estaticos de Angular
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
 
             app.UseRouting();
 

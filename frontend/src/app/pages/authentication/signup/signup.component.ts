@@ -5,6 +5,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { UserCreacionDTO } from 'src/app/shared/models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import { AuthenticationResponse } from 'src/app/shared/models/DTOs/authenticationDTOs/security';
 import Swal from 'sweetalert2';
+import { ReCaptchaV3Service } from 'ngx-captcha';
+import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,8 +16,9 @@ import Swal from 'sweetalert2';
 export class SignupComponent implements OnInit {
 
   usuarioForm: FormGroup; 
+  siteKey : string = "6Ldo03kdAAAAAJw5W7ba6Jh52c1Pp84atSE3F_83";
   
-  constructor(private fb : FormBuilder, private userService : UserService, private router: Router) { 
+  constructor(private fb : FormBuilder, private userService : UserService, private router: Router, private reCaptchaV3Service: ReCaptchaV3Service, private formService : FormService) { 
     this.usuarioForm = this.fb.group({
       cedula: [null, Validators.required],
       nombre: [null, Validators.required],
@@ -29,15 +32,20 @@ export class SignupComponent implements OnInit {
       email: [null, Validators.required],
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
-      aceptaTerminos: [false, Validators.required]
+      aceptaTerminos: [false, Validators.required],
+      recaptcha: [false, Validators.required]
     });
   }
 
   ngOnInit(): void {
+     this.reCaptchaV3Service.execute(this.siteKey, 'homepage', (token) => {
+      console.log('This is your token: ', token);
+    }, {
+        useGlobalDomain: false
+    });
   }
 
   signup(){
-    console.log(this.usuarioForm.value);
 
     if(this.usuarioForm.invalid){
       this.usuarioForm.markAllAsTouched()
@@ -52,6 +60,14 @@ export class SignupComponent implements OnInit {
       return
     }
 
+    if(!this.usuarioForm.get('recaptcha')?.value){
+      Swal.fire({
+        icon: 'error',
+        title: 'Debes validar que no eres un bot',
+      })
+      return
+    }
+
     const user: UserCreacionDTO = this.usuarioForm.value
         
         this.userService.guardarUsuario(user).subscribe(
@@ -59,6 +75,7 @@ export class SignupComponent implements OnInit {
             console.log(res.message);
             this.userService.logOut()
             this.router.navigateByUrl('login');
+            this.formService.successToast("Usuario Creado Exitósamente", 'top-start')
           },
           err => {
             let html = ''

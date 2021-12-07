@@ -51,12 +51,12 @@ export class MantenimientoEstadosComponent implements OnInit {
     if(!res.edit){
       this.estadoService.crearEstado(res.formValue).subscribe((res : any) => {
         this.getEstados()
-        this.formService.successToast()
+        this.formService.successToast("Guardado Exitósamente", 'bottom-start')
       })
     }else{
       this.estadoService.editarEstado(res.formValue).subscribe((res : any) => {
         this.getEstados()
-        this.formService.successToast()
+        this.formService.successToast("Guardado Exitósamente", 'bottom-start')
       })
     }
   }

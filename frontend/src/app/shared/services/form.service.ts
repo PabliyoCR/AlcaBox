@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertPosition } from 'sweetalert2';
 import { UsuarioDTO } from '../models/DTOs/authenticationDTOs/CredencialesDTO.model';
 import { PaqueteDTO } from '../models/DTOs/PaqueteDTO.model';
 import { FORM_OPT } from '../models/Form.model';
@@ -42,10 +42,10 @@ export class FormService {
     this.formCreateSubject.next()
   }
 
-  successToast(){
+  successToast(mensaje : string, position : SweetAlertPosition){
     const Toast = Swal.mixin({
       toast: true,
-      position: 'bottom-start',
+      position,
       showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
@@ -57,7 +57,7 @@ export class FormService {
 
     Toast.fire({
       icon: 'success',
-      title: 'Guardado con Éxito'
+      title: mensaje
     })
   }
 }

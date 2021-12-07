@@ -35,7 +35,7 @@ namespace backend.Controllers
         // GET: api/Paquetes
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetes()
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetes(string metodoOrden)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var roles_user = await _userManager.GetRolesAsync(user);
@@ -49,6 +49,7 @@ namespace backend.Controllers
             else
             {
                 paquetes = await _context.Paquete.OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
+                paquetes.Reverse();
             }
             return _mapper.Map<List<PaqueteDTO>>(paquetes);
         }

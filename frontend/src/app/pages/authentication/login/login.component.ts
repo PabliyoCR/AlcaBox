@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb : FormBuilder, private UserService : UserService, private router: Router) { 
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
@@ -28,21 +28,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(e : Event){
-
-    const autenticacionModel: IAutentificacion = {
-      email: (document.getElementById("email") as HTMLInputElement).value,
-      password: (document.getElementById("password") as HTMLInputElement).value
-    }
-    e.preventDefault()
-    
-    this.UserService.login(autenticacionModel).subscribe(
+  login(){
+    this.UserService.login(this.loginForm.value).subscribe(
       (res: AuthenticationResponse) => {
         localStorage.setItem('token', res.message);
         this.UserService.cargarPerfilUsuario();
         this.router.navigateByUrl('');
       },
       err => {
+        console.log(err);
       }
     );
   }

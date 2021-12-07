@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace backend.Migrations
 {
-    public partial class test : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -271,10 +271,10 @@ namespace backend.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "cedula", "direccion", "genero", "nombre", "primerApellido", "recibeOfertas", "segundoApellido", "tipoCedula", "tipoCuenta" },
                 values: new object[,]
                 {
-                    { "2d9c5d9f-cf3d-4399-8ad4-c24d89dfeceb", 0, "59182ec0-e6a2-4cdd-918c-754062486332", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEJT7ZxCnYiYnzJX0TTMtM3BUbbzxT2aW0aDiLRuA1nJaiyegqZJEJZ6zTs4itXGYgg==", null, false, "307fae9f-5620-47cb-a41a-f06d9b242f02", false, "Admin", "11111111", "Direcion Admin", 1, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
-                    { "cc48dae0-c28d-4f74-9a70-f8f8ad51b3ca", 0, "d9b12d85-6fe0-463a-9dbb-397e065c9f60", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEEzttN82iwZabhv1gnMxEgdPmoULWT15GyzR1V6adIYLHN/0DVzK0kEEzy1Y59Xnrw==", null, false, "13512aac-7a52-4d1a-bc6b-f8b36142f6d6", false, "Billy", "87654321", "Direcion Funcionario", 1, "Billy", "H", false, "", 1, 1 },
-                    { "d13f575e-ad9f-40a4-8a7c-b3592b632d93", 0, "0d23b9c4-47a5-4b9b-87b8-15d8742d9c6a", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAENUcJjOFvU28eVr7WP5KC1WMPmgQZ5l576LyLCS9MLYrNAaSfUVsgLXBAFeUW1Xh7w==", null, false, "243e1671-39a7-4ecc-9e27-4c8bffdbe3a5", false, "Pablo", "12345678", "Direcion Usuario", 1, "Pablo J.", "J", true, "", 1, 1 },
-                    { "c9c337b7-f05a-46d6-a898-b981521e1414", 0, "8240407c-c725-4d19-8a80-f05cb82f7247", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEFnee/RNDAMxnAyXr6zrYpzG5Kqzg3otKSFbpUuIEyhek9Q+sn0aVMU4Y/LcnZ+Grg==", null, false, "33f36da9-b742-4c76-b61a-9af0770e811a", false, "Bot", "55555555", "Direcion Bot", 1, "Bot R.", "B", false, "", 1, 1 }
+                    { "1b78746d-4fc2-4134-be69-2ca041a2fd9e", 0, "63832b5c-37a9-455a-943d-bfa74a292023", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAECeO2MEsNvNL1El3EYUghNvSHekx76SpAjT7bnr96X/+IFGsktJif04osbHsxZ16yg==", null, false, "a03cbec8-32c8-4630-ad5f-517329d0c326", false, "Admin", "11111111", "Direcion Admin", 1, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
+                    { "5ff95fa9-027e-4a4d-b8db-5fc5a18f89c5", 0, "47356310-000e-4681-ac3b-227be23e0446", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEGUepLn9+miK+UYSMlDIoY2f+UGlUiPka0a9sA4xw4X5T+r8goJQuT/D+W5wOqJwAA==", null, false, "2939d8b0-9393-4318-b9ba-03891308b413", false, "Billy", "87654321", "Direcion Funcionario", 1, "Billy", "H", false, "", 1, 1 },
+                    { "5fce9bf7-687d-490e-8458-59628d28551c", 0, "80b452f1-e830-4850-a040-850b9aafab96", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEOdhZk8qafJrNDNFUNcPV02zsD9P0ZBc6q43xXiWkDLe7+ocjTSHvCtGq2aiDEgPMg==", null, false, "19f0ea5c-dbef-4fe9-86e3-6a6e15b90fb2", false, "Pablo", "12345678", "Direcion Usuario", 1, "Pablo J.", "J", true, "", 1, 1 },
+                    { "76ece59b-af44-4eb8-92a1-437d17fa7502", 0, "0f6ff550-d2f9-4826-8ec5-a65b57ea8b06", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEN2jmqZCjBHMUBGS5iHT3epbHda1/i4RCLGw15a2qEEUcVlY723vHsU93kzoE1/SGQ==", null, false, "3443ad55-4c22-42cf-914d-3afb668c02ad", false, "Bot", "55555555", "Direcion Bot", 1, "Bot R.", "B", false, "", 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -298,10 +298,10 @@ namespace backend.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "Admin", "2d9c5d9f-cf3d-4399-8ad4-c24d89dfeceb" },
-                    { "Funcionario", "cc48dae0-c28d-4f74-9a70-f8f8ad51b3ca" },
-                    { "Usuario", "d13f575e-ad9f-40a4-8a7c-b3592b632d93" },
-                    { "Usuario", "c9c337b7-f05a-46d6-a898-b981521e1414" }
+                    { "Admin", "1b78746d-4fc2-4134-be69-2ca041a2fd9e" },
+                    { "Funcionario", "5ff95fa9-027e-4a4d-b8db-5fc5a18f89c5" },
+                    { "Usuario", "5fce9bf7-687d-490e-8458-59628d28551c" },
+                    { "Usuario", "76ece59b-af44-4eb8-92a1-437d17fa7502" }
                 });
 
             migrationBuilder.CreateIndex(
