@@ -2,7 +2,11 @@
 using backend.DataAccess;
 using backend.DTOs;
 using backend.Models;
+using backend.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,12 +21,17 @@ namespace backend.Controllers
     public class EstadoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
+        private IActividadService _actividadService;
+        
 
-        public EstadoController(ApplicationDbContext context, IMapper mapper)
+        public EstadoController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IActividadService actividadService, IMapper mapper)
         {
             _context = context;
+            _userManager = userManager;
             _mapper = mapper;
+            _actividadService = actividadService;
         }
 
         [HttpGet]
@@ -34,13 +43,17 @@ namespace backend.Controllers
 
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> CrearEstado(EstadoDTO estadoDTO)
         {
             var estado = _mapper.Map<Estado>(estadoDTO);
             estado.EstadoId = 0;
 
             _context.Add(estado);
+            var user = await _userManager.GetUserAsync(User);
+            _actividadService.creaRegistro(user, "Creacion de estado");
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
 

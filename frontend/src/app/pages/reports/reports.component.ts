@@ -34,6 +34,9 @@ export class ReportsComponent implements OnInit {
 
   userControl = new FormControl(null, [Validators.required]);
   orderControl = new FormControl("FechaRegistro", [Validators.required]);
+  fechaInicioControl = new FormControl();
+  fechaFinalControl = new FormControl();
+
   options: FORM_OPT[] = [];
   filteredOptions: Observable<FORM_OPT[]>;
 
@@ -91,8 +94,32 @@ export class ReportsComponent implements OnInit {
 
   reporteTotalPaquetes(){
     this.packageService.getPaquetes(this.orderControl.value).subscribe(res => {
-      console.log(res);
       this.reporteData = {titulo :`Reporte Paquetes Totales Filtrados por: ${this.orderControl.value}`, data : res, fecha : new Date()};
+      this.imprimirReporte()
+    })
+  }
+
+  reporteContable(){
+    if(!this.fechaInicioControl.value || !this.fechaFinalControl.value){
+      return
+    }
+    const fechaInicio = this.fechaInicioControl.value.toLocaleDateString('en-US')
+    const fechaFinal = this.fechaFinalControl.value.toLocaleDateString('en-US')
+    this.packageService.getPaquetesPorFecha(fechaInicio, fechaFinal).subscribe(res => {
+
+      let paquetesData : any[] = []
+      let totalPaquetes = 0
+      let totalPrecio = 0
+
+      res.forEach(paq => {
+        totalPaquetes += 1
+        paquetesData.push({ ID : paq.paqueteId, Precio : paq.precio })
+        totalPrecio += paq.precio
+      })
+      paquetesData.push({ TotalPaquetes : totalPaquetes })
+      paquetesData.push({ PrecioTotal : totalPrecio })
+
+      this.reporteData = {titulo :`Reporte Contable en Fecha Inicial: ${fechaInicio}, Fecha Final: ${fechaFinal}`, data : paquetesData, fecha : new Date()};
       this.imprimirReporte()
     })
   }

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace backend.Migrations
 {
-    public partial class @new : Migration
+    public partial class userActio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -195,7 +195,7 @@ namespace backend.Migrations
                 {
                     Accion_Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Usuarios = table.Column<string>(type: "text", nullable: true),
+                    UsuarioId = table.Column<string>(type: "text", nullable: true),
                     Fecha = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Accion = table.Column<string>(type: "text", nullable: true)
                 },
@@ -203,8 +203,8 @@ namespace backend.Migrations
                 {
                     table.PrimaryKey("PK_BitacoraAccion", x => x.Accion_Id);
                     table.ForeignKey(
-                        name: "FK_BitacoraAccion_AspNetUsers_Usuarios",
-                        column: x => x.Usuarios,
+                        name: "FK_BitacoraAccion_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -272,10 +272,10 @@ namespace backend.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "cedula", "direccion", "genero", "habilitado", "nombre", "primerApellido", "recibeOfertas", "segundoApellido", "tipoCedula", "tipoCuenta" },
                 values: new object[,]
                 {
-                    { "b73f1664-dd4a-45b1-b794-cbbc0248fb8d", 0, "041e97e2-4a67-45f3-a8eb-bda3ac17381f", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEHn/F7NFQWcEzT/b883oUyeKUdPAW/3LWMcXapRPt0ZMUbsuUfAgFGjvBqdY0Xfl9A==", null, false, "75f1cb74-2fb9-4be7-8af4-978d311c185d", false, "Admin", "11111111", "Direcion Admin", 1, false, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
-                    { "18709e1f-effc-4fc0-896c-ab4ff6755280", 0, "6e601b2e-a68b-441d-8309-ad6d7d2e9c3b", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAELDCi8VDsCAa+jO9oeToHUmjlm9TTqqSxjvUEkxQyjm0hTiIcVl0casn3+o67HoKgQ==", null, false, "2be25147-6969-45c9-8341-b90b3878e3e7", false, "Billy", "87654321", "Direcion Funcionario", 1, false, "Billy", "H", false, "", 1, 1 },
-                    { "5db01d7b-7886-41c2-8674-ec5d8b790005", 0, "c985bbce-d8e9-4ae9-9de3-c831bc157fa8", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEC+eeg+sCwAfnFdctguCrfKquOPtVclRDNrCJTSnb70nih9lEgV0TJUudh+8JQVz+A==", null, false, "446102cc-aa41-4119-9cf5-78b274346549", false, "Pablo", "12345678", "Direcion Usuario", 1, false, "Pablo J.", "J", true, "", 1, 1 },
-                    { "6bb6d963-66a2-48e6-8b58-afedc10a8996", 0, "99720bb3-520d-4705-a12d-5d98a057525a", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEIwnXPU50rmvSZ1xLhALWheR2ezABHWD2+F53hVZ0S/9sPRQBVMFf2OO5DDDLlraLA==", null, false, "8a4ff38b-401a-4f6b-8b49-910caee3e2ec", false, "Bot", "55555555", "Direcion Bot", 1, false, "Bot R.", "B", false, "", 1, 1 }
+                    { "5433dd74-eb5c-4c0f-87f4-8c174404e581", 0, "045934f5-cf45-4002-9c9c-d16f38f9a49f", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEK/SV+E3uo777ZwLMwQ4lV93UbRsbh2dih4VIV0ZOONbIzZlfepUP3vTqBYqpAPYlg==", null, false, "7ead768c-5d00-4f2a-801b-b867a06223b5", false, "Admin", "11111111", "Direcion Admin", 1, false, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
+                    { "79fac62a-3fc2-4cc8-b873-22a5b4c8c464", 0, "3d8d1247-d732-443b-aa53-51f5e1a02a08", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAENWhtJiui+L+P+A/DJVbef3TyvKqsNX8FsGxVsQmVI3OU6OjP8tf23lt8TYCa5i70g==", null, false, "ba27ac7c-5bb4-4308-aa22-062b67895c1e", false, "Billy", "87654321", "Direcion Funcionario", 1, false, "Billy", "H", false, "", 1, 1 },
+                    { "cab94cad-4d1a-484e-8b35-a72b9f7d725a", 0, "d96a7674-69fa-4562-a207-d8214cd984cb", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEMnH7wNI2YdjEnu4/mcGHLxsX2OPAnEovNwTH7u0BIYzmioqv609t/jFdR8B4ydkVQ==", null, false, "88d91c73-1230-4d19-890c-f86cf0760854", false, "Pablo", "12345678", "Direcion Usuario", 1, false, "Pablo J.", "J", true, "", 1, 1 },
+                    { "13ff1191-4094-4fe5-8062-be0293014efd", 0, "34b889f3-f76e-4383-9b11-539d8e8ded66", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEGny1xodKfHiac/KmZmELthFum5COY9McQ59bjttthY1cpaZsqF1Cexp8xtIG2N9gA==", null, false, "be2fd289-288e-4cf7-a0c1-19aadebfc44d", false, "Bot", "55555555", "Direcion Bot", 1, false, "Bot R.", "B", false, "", 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -299,10 +299,10 @@ namespace backend.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "Admin", "b73f1664-dd4a-45b1-b794-cbbc0248fb8d" },
-                    { "Funcionario", "18709e1f-effc-4fc0-896c-ab4ff6755280" },
-                    { "Usuario", "5db01d7b-7886-41c2-8674-ec5d8b790005" },
-                    { "Usuario", "6bb6d963-66a2-48e6-8b58-afedc10a8996" }
+                    { "Admin", "5433dd74-eb5c-4c0f-87f4-8c174404e581" },
+                    { "Funcionario", "79fac62a-3fc2-4cc8-b873-22a5b4c8c464" },
+                    { "Usuario", "cab94cad-4d1a-484e-8b35-a72b9f7d725a" },
+                    { "Usuario", "13ff1191-4094-4fe5-8062-be0293014efd" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -343,9 +343,9 @@ namespace backend.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_BitacoraAccion_Usuarios",
+                name: "IX_BitacoraAccion_UsuarioId",
                 table: "BitacoraAccion",
-                column: "Usuarios");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Paquete_ArancelId",

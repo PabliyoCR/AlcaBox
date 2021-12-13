@@ -100,6 +100,14 @@ namespace backend.Controllers
             return _mapper.Map<List<PaqueteDTO>>(paquetes);
         }
 
+        [HttpGet("PorFechas")]
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetesPorFechas([FromHeader] DateTime fechaInicio, [FromHeader] DateTime fechaFinal)
+        {
+            var paquetes = await _context.Paquete.Where(paq => paq.FechaRegistro >= fechaInicio && paq.FechaRegistro <= fechaFinal).OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
+            paquetes.Reverse();
+            return _mapper.Map<List<PaqueteDTO>>(paquetes);
+        }
+
         // POST: api/Paquetes
         [HttpPost]
         public async Task<ActionResult<PaqueteDTO>> PostPaquete(PaqueteCreacionDTO paqueteCreacionDTO)

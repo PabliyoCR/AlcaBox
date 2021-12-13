@@ -20,6 +20,16 @@ export class PackageService {
     return this.http.get<PaqueteDTO[]>(`${environment.urlAPI}/Paquetes`, { headers });
   }
 
+  getPaquetesPorFecha(fechaInicio : string, fechaFinal : string): Observable<PaqueteDTO[]>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'json',
+      'fechaInicio' : fechaInicio,
+      'fechaFinal' : fechaFinal
+    });
+    return this.http.get<PaqueteDTO[]>(`${environment.urlAPI}/Paquetes/PorFechas`, { headers });
+  }
+
   crearPaquete(paquete: PaqueteCreacionDTO): Observable<number>{
     return this.http.post<number>(`${environment.urlAPI}/Paquetes`, paquete);
   }

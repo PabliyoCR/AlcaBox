@@ -96,6 +96,8 @@ namespace backend
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<IMailService, SendGridMailService>();
 
+            services.AddTransient<IActividadService, ActividadService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -138,7 +140,6 @@ namespace backend
             // Servir archivos estaticos de Angular
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
 
             app.UseRouting();
 

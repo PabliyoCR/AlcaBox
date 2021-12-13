@@ -71,6 +71,13 @@ namespace backend.Controllers
             return _mapper.Map<List<LoginLogDTO>>(logins);
         }
 
+        [HttpGet("Actions")]
+        public async Task<ActionResult<IEnumerable<BitacoraAccion>>> GetUserActions([FromHeader] DateTime fechaInicio, [FromHeader] DateTime fechaFinal)
+        {
+            var actions = await _context.BitacoraAccion.Where(action => action.Fecha >= fechaInicio && action.Fecha <= fechaFinal).ToListAsync();
+            return _mapper.Map<List<BitacoraAccion>>(actions);
+        }
+
         [HttpPut]
         public async Task<IActionResult> actualizarUsuario(UsuarioEdicionDTO usuarioEdicionDTO)
         {

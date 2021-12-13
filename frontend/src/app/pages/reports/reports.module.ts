@@ -6,6 +6,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -19,7 +20,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatAutocompleteModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatDatepickerModule
   ]
 })
 export class ReportsModule { }

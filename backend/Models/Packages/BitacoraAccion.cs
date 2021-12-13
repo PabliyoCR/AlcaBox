@@ -13,7 +13,8 @@ namespace backend.Models
         [Key]
         public int Accion_Id { get; set; }
 
-        [ForeignKey("Usuarios")]
+        public string UsuarioId { get; set; }
+        [ForeignKey(nameof(UsuarioId))]
         public ApplicationUser Usuario { get; set; }
 
         public DateTime Fecha { get; set; }

@@ -39,5 +39,9 @@ namespace backend.Models
 
         public bool habilitado { get; set; }
 
+        public static implicit operator string(ApplicationUser v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

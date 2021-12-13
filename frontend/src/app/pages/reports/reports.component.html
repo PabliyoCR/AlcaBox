@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-5">
                 <b>Reporte General de Paquetería Total ordenado por:</b>
                 <select class="form-select w-25 d-inline ms-3" [formControl]="orderControl" name="paqutesTotales" id="paqutesTotales">
                     <option value="FechaRegistro" selected>Fecha de Registro</option>
@@ -43,6 +43,16 @@
 
             <div class="mb-3">
                 <b>Reporte Contable (Paquetería Facturada y Pendiente)</b>
+               <mat-form-field appearance="fill">
+                    <mat-label>Rango de Fechas</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Fecha Inicio" [formControl]="fechaInicioControl">
+                        <input matEndDate placeholder="Fecha Final" [formControl]="fechaFinalControl">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+                <button class="btn btn-primary ms-5 mt-3" (click)="reporteContable()">Generar Reporte</button>
             </div>
             <hr>
             <h3>Bitácoras</h3>
