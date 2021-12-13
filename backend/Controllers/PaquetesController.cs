@@ -35,7 +35,7 @@ namespace backend.Controllers
         // GET: api/Paquetes
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetes(string metodoOrden)
+        public async Task<ActionResult<IEnumerable<PaqueteDTO>>> GetPaquetes([FromHeader] string metodoOrden)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var roles_user = await _userManager.GetRolesAsync(user);
@@ -48,8 +48,23 @@ namespace backend.Controllers
             }
             else
             {
-                paquetes = await _context.Paquete.OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
-                paquetes.Reverse();
+
+                switch (metodoOrden)
+                {
+                    case "FechaRegistro":
+                        paquetes = await _context.Paquete.OrderBy(paquete => paquete.FechaRegistro).ToListAsync();
+                        paquetes.Reverse(); 
+                        break;
+                    case "Estado":
+                        paquetes = await _context.Paquete.OrderBy(paquete => paquete.Estado).ToListAsync();
+                        break;
+                    case "Usuario":
+                        paquetes = await _context.Paquete.OrderBy(paquete => paquete.Usuario).ToListAsync();
+                        break;
+                    default:
+                        paquetes = await _context.Paquete.ToListAsync();
+                        break;
+                }
             }
             return _mapper.Map<List<PaqueteDTO>>(paquetes);
         }

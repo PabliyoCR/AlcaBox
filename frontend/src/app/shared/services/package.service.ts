@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,8 +11,13 @@ export class PackageService {
 
   constructor(private http: HttpClient) { }
 
-  getPaquetes(): Observable<PaqueteDTO[]>{
-    return this.http.get<PaqueteDTO[]>(`${environment.urlAPI}/Paquetes`);
+  getPaquetes(metodoOrden : string): Observable<PaqueteDTO[]>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'json',
+      'metodoOrden' : metodoOrden
+    });
+    return this.http.get<PaqueteDTO[]>(`${environment.urlAPI}/Paquetes`, { headers });
   }
 
   crearPaquete(paquete: PaqueteCreacionDTO): Observable<number>{

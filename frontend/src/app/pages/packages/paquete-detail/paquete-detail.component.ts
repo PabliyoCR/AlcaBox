@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { PaqueteDTO } from 'src/app/shared/models/DTOs/PaqueteDTO.model';
 
@@ -15,4 +16,7 @@ export class PaqueteDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCompare(_left: KeyValue<any, any>, _right: KeyValue<any, any>): number {
+    return 1;
+  }
 }

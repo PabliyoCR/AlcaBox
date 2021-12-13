@@ -62,6 +62,7 @@ namespace backend.Services
             var applicationUser = _mapper.Map<ApplicationUser>(usuarioCreacionDTO);
             applicationUser.UserName = usuarioCreacionDTO.email;
             applicationUser.Id = Guid.NewGuid().ToString();
+            applicationUser.habilitado = true;
 
             var result = await _userManager.CreateAsync(applicationUser, usuarioCreacionDTO.password);
 
@@ -123,7 +124,7 @@ namespace backend.Services
 
             var claims = new[]
             {
-                new Claim("Email", model.Email),
+                new Claim("User", model.Email),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim("Role", role.FirstOrDefault())
             };

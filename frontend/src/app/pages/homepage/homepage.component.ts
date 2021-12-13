@@ -17,6 +17,38 @@ export class HomepageComponent implements OnInit {
         "Transporte Marítimo LCL / FCL",
         "Transporte Terrestre LTL / FTL"
       ]
+    },
+    {
+      image : "assets/images/homepage/aduana.jpg",
+      title : "Gestión Aduanera",
+      services : [
+        "Trámites Aduanales",
+        "Cobertura logística a nivel mundial para importaciones y exportaciones"
+      ]
+    },
+    {
+      image : "assets/images/homepage/moving.jpg",
+      title : "Servicio Courier",
+      services : [
+        "Paquetería desde locker en Miami hasta la puerta de tu casa"
+      ]
+    },
+    {
+      image : "assets/images/homepage/courier.jpg",
+      title : "Freight Fowarder",
+      services : [
+        "Recolecciones de mercadería",
+        "Embalajes",
+        "Seguro"
+      ]
+    },
+    {
+      image : "assets/images/homepage/compra.jpg",
+      title : "Compras en Línea",
+      services : [
+        "Asesorías",
+        "Reportes"
+      ]
     }
   ]
 

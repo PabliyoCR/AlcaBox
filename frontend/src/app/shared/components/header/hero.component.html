@@ -9,7 +9,10 @@
         </svg>
         <div class="hero__background__image"></div>
     </div>
-    <div class="container">
+    <div class="hero__logo" (click)="goHome()">
+        <img class="w-100" src="assets/images/global/logo.png" alt="">
+    </div>
+    <div class="container mt-4">
         <div class="row">
             <div class="col">
                 <div class="hero__links px-5">
@@ -19,7 +22,10 @@
                     <a *ngIf="isAuthenticated() && isAuthorizated(['Admin','Funcionario'])" class="hero__links__link text-uppercase" routerLink= "reports" routerLinkActive="router-link-active">reportes</a>
                     <a class="hero__links__link text-uppercase" routerLink= "about" routerLinkActive="router-link-active">acerca de</a>
                     <a class="hero__links__link text-uppercase" routerLink= "help" routerLinkActive="router-link-active">ayuda</a>
-                    <a *ngIf="isAuthenticated()" class="text-uppercase" (click)="logOut()">Cerrar Sesión</a>
+                    <a *ngIf="isAuthenticated()" class="hero__links__link hero__links__circle" (click) = "openProfile()">
+                        <img class="w-100" src="assets/images/global/user.svg" alt="">
+                    </a>
+                    <a *ngIf="isAuthenticated()" class="hero__links__link text-uppercase" (click)="logOut()">Cerrar Sesión</a>
                     <ng-container *ngIf="!isAuthenticated()">
                         <button class="btn btn-secondary" routerLink= "login">Iniciar Sesión</button>
                         <button class="btn btn-light"  routerLink= "signup">Registrarse</button>

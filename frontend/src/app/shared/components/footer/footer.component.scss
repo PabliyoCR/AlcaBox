@@ -2,8 +2,10 @@
 
 :host{
     min-height: toREM(275);
-    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0) 33%, $secondary 100%);
+    background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0) 15% , rgba($secondary, 0.4) 40%, $secondary 100%);
     position: relative;
+    color: $white;
+    text-shadow: toREM(3) toREM(4) toREM(8) #3f3f3f;
 }
 
 .footer{
@@ -19,6 +21,30 @@
             background-position-y: toREM(-700);
             -webkit-clip-path: url(#footer-clip);
             clip-path: url(#footer-clip);
+        }
+    }
+
+    &__content{
+
+        margin-top: toREM(80);
+
+        &__logo{
+            width: toREM(204);
+            height: toREM(70);
+        }
+
+        &--left{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &--right{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

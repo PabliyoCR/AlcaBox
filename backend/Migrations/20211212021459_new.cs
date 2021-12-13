@@ -49,6 +49,7 @@ namespace backend.Migrations
                     direccion = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true),
                     recibeOfertas = table.Column<bool>(type: "boolean", nullable: false),
                     tipoCuenta = table.Column<int>(type: "integer", nullable: false),
+                    habilitado = table.Column<bool>(type: "boolean", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -268,13 +269,13 @@ namespace backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "cedula", "direccion", "genero", "nombre", "primerApellido", "recibeOfertas", "segundoApellido", "tipoCedula", "tipoCuenta" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "cedula", "direccion", "genero", "habilitado", "nombre", "primerApellido", "recibeOfertas", "segundoApellido", "tipoCedula", "tipoCuenta" },
                 values: new object[,]
                 {
-                    { "1b78746d-4fc2-4134-be69-2ca041a2fd9e", 0, "63832b5c-37a9-455a-943d-bfa74a292023", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAECeO2MEsNvNL1El3EYUghNvSHekx76SpAjT7bnr96X/+IFGsktJif04osbHsxZ16yg==", null, false, "a03cbec8-32c8-4630-ad5f-517329d0c326", false, "Admin", "11111111", "Direcion Admin", 1, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
-                    { "5ff95fa9-027e-4a4d-b8db-5fc5a18f89c5", 0, "47356310-000e-4681-ac3b-227be23e0446", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEGUepLn9+miK+UYSMlDIoY2f+UGlUiPka0a9sA4xw4X5T+r8goJQuT/D+W5wOqJwAA==", null, false, "2939d8b0-9393-4318-b9ba-03891308b413", false, "Billy", "87654321", "Direcion Funcionario", 1, "Billy", "H", false, "", 1, 1 },
-                    { "5fce9bf7-687d-490e-8458-59628d28551c", 0, "80b452f1-e830-4850-a040-850b9aafab96", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEOdhZk8qafJrNDNFUNcPV02zsD9P0ZBc6q43xXiWkDLe7+ocjTSHvCtGq2aiDEgPMg==", null, false, "19f0ea5c-dbef-4fe9-86e3-6a6e15b90fb2", false, "Pablo", "12345678", "Direcion Usuario", 1, "Pablo J.", "J", true, "", 1, 1 },
-                    { "76ece59b-af44-4eb8-92a1-437d17fa7502", 0, "0f6ff550-d2f9-4826-8ec5-a65b57ea8b06", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEN2jmqZCjBHMUBGS5iHT3epbHda1/i4RCLGw15a2qEEUcVlY723vHsU93kzoE1/SGQ==", null, false, "3443ad55-4c22-42cf-914d-3afb668c02ad", false, "Bot", "55555555", "Direcion Bot", 1, "Bot R.", "B", false, "", 1, 1 }
+                    { "b73f1664-dd4a-45b1-b794-cbbc0248fb8d", 0, "041e97e2-4a67-45f3-a8eb-bda3ac17381f", "admin@alcabox.com", false, false, null, "ADMIN@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEHn/F7NFQWcEzT/b883oUyeKUdPAW/3LWMcXapRPt0ZMUbsuUfAgFGjvBqdY0Xfl9A==", null, false, "75f1cb74-2fb9-4be7-8af4-978d311c185d", false, "Admin", "11111111", "Direcion Admin", 1, false, "AlcaBox Admin", "Alca", false, "Box", 1, 1 },
+                    { "18709e1f-effc-4fc0-896c-ab4ff6755280", 0, "6e601b2e-a68b-441d-8309-ad6d7d2e9c3b", "billy@alcabox.com", false, false, null, "BILLY@ALCABOX.COM", null, "AQAAAAEAACcQAAAAELDCi8VDsCAa+jO9oeToHUmjlm9TTqqSxjvUEkxQyjm0hTiIcVl0casn3+o67HoKgQ==", null, false, "2be25147-6969-45c9-8341-b90b3878e3e7", false, "Billy", "87654321", "Direcion Funcionario", 1, false, "Billy", "H", false, "", 1, 1 },
+                    { "5db01d7b-7886-41c2-8674-ec5d8b790005", 0, "c985bbce-d8e9-4ae9-9de3-c831bc157fa8", "pablo@alcabox.com", false, false, null, "PABLO@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEC+eeg+sCwAfnFdctguCrfKquOPtVclRDNrCJTSnb70nih9lEgV0TJUudh+8JQVz+A==", null, false, "446102cc-aa41-4119-9cf5-78b274346549", false, "Pablo", "12345678", "Direcion Usuario", 1, false, "Pablo J.", "J", true, "", 1, 1 },
+                    { "6bb6d963-66a2-48e6-8b58-afedc10a8996", 0, "99720bb3-520d-4705-a12d-5d98a057525a", "bot@alcabox.com", false, false, null, "BOT@ALCABOX.COM", null, "AQAAAAEAACcQAAAAEIwnXPU50rmvSZ1xLhALWheR2ezABHWD2+F53hVZ0S/9sPRQBVMFf2OO5DDDLlraLA==", null, false, "8a4ff38b-401a-4f6b-8b49-910caee3e2ec", false, "Bot", "55555555", "Direcion Bot", 1, false, "Bot R.", "B", false, "", 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -298,10 +299,10 @@ namespace backend.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "Admin", "1b78746d-4fc2-4134-be69-2ca041a2fd9e" },
-                    { "Funcionario", "5ff95fa9-027e-4a4d-b8db-5fc5a18f89c5" },
-                    { "Usuario", "5fce9bf7-687d-490e-8458-59628d28551c" },
-                    { "Usuario", "76ece59b-af44-4eb8-92a1-437d17fa7502" }
+                    { "Admin", "b73f1664-dd4a-45b1-b794-cbbc0248fb8d" },
+                    { "Funcionario", "18709e1f-effc-4fc0-896c-ab4ff6755280" },
+                    { "Usuario", "5db01d7b-7886-41c2-8674-ec5d8b790005" },
+                    { "Usuario", "6bb6d963-66a2-48e6-8b58-afedc10a8996" }
                 });
 
             migrationBuilder.CreateIndex(

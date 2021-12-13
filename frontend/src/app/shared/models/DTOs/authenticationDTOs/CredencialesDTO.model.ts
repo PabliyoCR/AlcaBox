@@ -9,6 +9,7 @@ export interface UserCreacionDTO {
   genero : number
   direccion : string
   tipoCuenta : number
+  habilitado? : boolean
   recibeOfertas :  boolean
   password?: string;
   confirmPassword?: string;

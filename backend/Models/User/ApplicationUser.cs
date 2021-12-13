@@ -37,5 +37,7 @@ namespace backend.Models
         //[Required]
         public int tipoCuenta { get; set; }
 
+        public bool habilitado { get; set; }
+
     }
 }

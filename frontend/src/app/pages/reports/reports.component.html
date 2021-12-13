@@ -22,7 +22,7 @@
                 <button class="btn btn-primary ms-5" (click)="reportePaquetesUsuario()">Generar Reporte</button>
             </div>
             <div class="mb-3">
-                <b>Reporte General Paquetería según Estado</b>
+                <b>Reporte General de Paquetería filtrada por Estado</b>
             </div>
             <div class="mb-5">
                 <mat-checkbox *ngFor="let estado of estadosPaquetes" class="reportePaqueteria me-5" color = "primary" [value]="estado.estadoId.toString()">{{estado.nombre}}</mat-checkbox>
@@ -30,6 +30,17 @@
                     <button class="btn btn-primary ms-5 mt-3" (click)="reportePaquetesEstados()">Generar Reporte</button>
                 </div>
             </div>
+
+            <div class="mb-3">
+                <b>Reporte General de Paquetería Total ordenado por:</b>
+                <select class="form-select w-25 d-inline ms-3" [formControl]="orderControl" name="paqutesTotales" id="paqutesTotales">
+                    <option value="FechaRegistro" selected>Fecha de Registro</option>
+                    <option value="Estado">Estados</option>
+                    <option value="Usuario">Usuarios</option>
+                </select>
+                <button class="btn btn-primary ms-3 d-inline" (click)="reporteTotalPaquetes()">Generar Reporte</button>
+            </div>
+
             <div class="mb-3">
                 <b>Reporte Contable (Paquetería Facturada y Pendiente)</b>
             </div>
@@ -55,7 +66,7 @@
                     <hr>
                     <div *ngFor="let registro of reporteData.data">
                         <div *ngFor="let item of registro | keyvalue:onCompare">
-                            {{item.key}} : {{item.value}}
+                            {{item.key}} : {{item.value | json}}
                         </div>
                         <hr>
                     </div>

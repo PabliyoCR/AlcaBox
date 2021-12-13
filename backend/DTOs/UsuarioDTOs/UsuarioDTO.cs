@@ -27,6 +27,8 @@ namespace backend.DTOs
 
         public int tipoCuenta { get; set; }
 
+        public bool habilitado { get; set; }
+
         public string email { get; set; }
 
         public string emailConfirmed { get; set; }

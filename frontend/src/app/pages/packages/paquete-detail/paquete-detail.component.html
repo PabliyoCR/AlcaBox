@@ -7,24 +7,11 @@
   </div>
   <div class="modal-body">
     <ng-container *ngIf="detail">
-        <div>{{detail.paqueteId}}</div>
-
-        <div>{{detail.descripcion}}</div>
-
-        <div>{{detail.usuario.cedula}}</div>
-        <div>{{detail.usuario.nombre}}</div>
-
-        <div>{{detail.fechaRegistro}}</div>
-
-        <div>{{detail.peso}}</div>
-
-        <div>{{detail.arancel.nombre}}</div>
-
-        <div>{{detail.estado.nombre}}</div>
-
-        <div>{{detail.precio}}</div>
-
-        <div>{{detail.tracking}}</div>
+        <ng-container *ngIf="detail">
+            <div class="mb-2" *ngFor="let item of detail | keyvalue:onCompare">
+              {{item.key}} : {{item.value | json }}
+            </div>
+        </ng-container>
 
     </ng-container>
   </div>

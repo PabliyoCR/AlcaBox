@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UsuarioDTO } from '../../models/DTOs/authenticationDTOs/CredencialesDTO.model';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'div[app-hero]',
@@ -9,7 +12,9 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class HeroComponent implements OnInit {
 
-  constructor(public router : Router, private userService : UserService) { }
+  bsModalRef?: BsModalRef;
+  
+  constructor(public router : Router, private userService : UserService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
   }
@@ -22,9 +27,24 @@ export class HeroComponent implements OnInit {
     return this.userService.isAuthorizated(roles);
   }
 
+  goHome(){
+    this.router.navigate([''])
+  }
+
   logOut(){
     this.userService.logOut();
     this.router.navigateByUrl('login');
+  }
+
+  openProfile(){
+    this.userService.getUserByEmail().subscribe(res => {
+      console.log(res);
+      //this.bsModalRef = this.modalService.show(ProfileComponent,{ 
+      //  initialState : { 
+      //    user : res
+      //  }
+      //});
+    })
   }
 
 }

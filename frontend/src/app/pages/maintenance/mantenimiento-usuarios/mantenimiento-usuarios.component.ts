@@ -19,16 +19,18 @@ export class MantenimientoUsuariosComponent implements OnInit {
 
   infoToDisplay = [
     { name: 'cedula', display: 'Identificación (Cédula)' },
-    { name: 'tipoCedula', display: 'Tipo de Cédula' },
+    { name: 'tipoCedula', display: 'Tipo de Cédula', posibleValues: ['cedula', 'pasaporte'] },
     { name: 'nombre', display: 'Nombre' },
     { name: 'primerApellido', display: 'Primer Apellido' },
-    { name: 'segundoApellido', display: 'Segundo Apellido' },
-    { name: 'genero', display: 'Género' },
-    { name: 'direccion', display: 'Dirección' },
-    { name: 'recibeOfertas', display: 'Recibe Ofertas' },
-    { name: 'tipoCuenta', display: 'Tipo de Cuenta' },
+    //{ name: 'segundoApellido', display: 'Segundo Apellido' },
+    { name: 'roleId', display: 'Role' },
+    { name: 'genero', display: 'Género', posibleValues: ['masculino', 'femenino'] },
+    //{ name: 'direccion', display: 'Dirección' },
+    //{ name: 'recibeOfertas', display: 'Recibe Ofertas' },
+    { name: 'tipoCuenta', display: 'Tipo de Cuenta', posibleValues: ['empresarial', 'personal']},
+    { name: 'habilitado', display: 'Habilitado' },
     { name: 'email', display: 'Email' },
-    { name: 'emailConfirmed', display: 'Cuenta Confirmada' }
+    //{ name: 'emailConfirmed', display: 'Cuenta Confirmada' }
   ];
 
   displayCols = this.infoToDisplay.map(col => col.name)
@@ -45,6 +47,7 @@ export class MantenimientoUsuariosComponent implements OnInit {
     { id : "genero", type : "select", placeholder: "Género", options : [{name : "masculino", value : 1, display : "Masculino"}, {name :"femenino", value : 2, display : "Femenino"}]},
     { id : "direccion", type : "textarea", placeholder: "Dirección"},
     { id : "tipoCuenta", type : "select", placeholder: "Tipo de Cuenta",  options : [{name : "empresarial", value : 1, display : "Empresarial"}, {name :"personal", value : 2, display : "Personal"}]},
+    { id : "habilitado", type : "checkbox", placeholder: "Usuario Habilitado"},
     { id : "recibeOfertas", type : "checkbox", placeholder: "Recibe Ofertas"},
     { id : "roleId", type : "select", placeholder: "Role", options : [{name : "usuario", value : "Usuario", display : "Usuario"}, {name :"funcionario", value : "Funcionario", display : "Funcionario"}, {name :"admin", value : "Admin", display : "Admin"}]},
   ]
@@ -61,6 +64,7 @@ export class MantenimientoUsuariosComponent implements OnInit {
       genero: [null, Validators.required],
       direccion: [null, Validators.required],
       tipoCuenta: [null, Validators.required],
+      habilitado: [true],
       recibeOfertas: [true],
       roleId: [null, Validators.required]
     });
@@ -89,5 +93,4 @@ export class MantenimientoUsuariosComponent implements OnInit {
       })
     }
   }
-
 }

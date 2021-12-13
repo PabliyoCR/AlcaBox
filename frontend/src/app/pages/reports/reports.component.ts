@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { EstadoDTO, PaqueteDTO } from 'src/app/shared/models/DTOs/PaqueteDTO.model';
@@ -11,6 +11,7 @@ import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';  
 import { KeyValue } from '@angular/common';
 import { EstadosService } from 'src/app/shared/services/estados.service';
+import { PackageService } from 'src/app/shared/services/package.service';
 
 @Component({
   selector: 'app-reports',
@@ -19,7 +20,7 @@ import { EstadosService } from 'src/app/shared/services/estados.service';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor(private formService : FormService, private http: HttpClient, private estadosService : EstadosService) { }
+  constructor(private formService : FormService, private http: HttpClient, private estadosService : EstadosService, private packageService : PackageService) { }
 
   @ViewChild('reporte') reporte: ElementRef;
   @ViewChild('contenidoReporte') contenidoReporte: ElementRef;
@@ -31,7 +32,8 @@ export class ReportsComponent implements OnInit {
     fecha : Date
   }
 
-  userControl = new FormControl();
+  userControl = new FormControl(null, [Validators.required]);
+  orderControl = new FormControl("FechaRegistro", [Validators.required]);
   options: FORM_OPT[] = [];
   filteredOptions: Observable<FORM_OPT[]>;
 
@@ -56,6 +58,10 @@ export class ReportsComponent implements OnInit {
   }
 
   reportePaquetesUsuario(){
+    if(this.userControl.invalid){
+      this.userControl.markAsTouched()
+      return
+    }
     this.http.get<PaqueteDTO[]>(`${environment.urlAPI}/Paquetes/User/${this.userControl.value.value}`).subscribe(res => {
       this.reporteData = {titulo :"Reporte Paquetes Asociados a Usuario", data : res, fecha : new Date()};
       this.imprimirReporte()
@@ -81,6 +87,14 @@ export class ReportsComponent implements OnInit {
       this.reporteData = {titulo :"Reporte Paquetes según Estado", data : res, fecha : new Date()};
       this.imprimirReporte()
     });
+  }
+
+  reporteTotalPaquetes(){
+    this.packageService.getPaquetes(this.orderControl.value).subscribe(res => {
+      console.log(res);
+      this.reporteData = {titulo :`Reporte Paquetes Totales Filtrados por: ${this.orderControl.value}`, data : res, fecha : new Date()};
+      this.imprimirReporte()
+    })
   }
 
   reporteIngresosSistema(){

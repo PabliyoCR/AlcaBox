@@ -9,9 +9,8 @@
 $grid-breakpoints: (xs: 0,
   sm: 576px,
   md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1440px);
+  lg: 1200px,
+  xl: 1920px);
 // scss-docs-end grid-breakpoints
 
 @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
@@ -26,8 +25,7 @@ $grid-breakpoints: (xs: 0,
 $container-max-widths: (sm: 540px,
   md: 83.19444444%,
   lg: 83.19444444%,
-  xl: 83.19444444%,
-  xxl: 1198px);
+  xl: 1660px,);
 // scss-docs-end container-max-widths
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");

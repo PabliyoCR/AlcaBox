@@ -10,7 +10,7 @@ using backend.DataAccess;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211205161849_new")]
+    [Migration("20211212021459_new")]
     partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,22 +157,22 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "1b78746d-4fc2-4134-be69-2ca041a2fd9e",
+                            UserId = "b73f1664-dd4a-45b1-b794-cbbc0248fb8d",
                             RoleId = "Admin"
                         },
                         new
                         {
-                            UserId = "5ff95fa9-027e-4a4d-b8db-5fc5a18f89c5",
+                            UserId = "18709e1f-effc-4fc0-896c-ab4ff6755280",
                             RoleId = "Funcionario"
                         },
                         new
                         {
-                            UserId = "5fce9bf7-687d-490e-8458-59628d28551c",
+                            UserId = "5db01d7b-7886-41c2-8674-ec5d8b790005",
                             RoleId = "Usuario"
                         },
                         new
                         {
-                            UserId = "76ece59b-af44-4eb8-92a1-437d17fa7502",
+                            UserId = "6bb6d963-66a2-48e6-8b58-afedc10a8996",
                             RoleId = "Usuario"
                         });
                 });
@@ -258,6 +258,9 @@ namespace backend.Migrations
                     b.Property<int>("genero")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("habilitado")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("nombre")
                         .HasColumnType("text");
 
@@ -290,21 +293,22 @@ namespace backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b78746d-4fc2-4134-be69-2ca041a2fd9e",
+                            Id = "b73f1664-dd4a-45b1-b794-cbbc0248fb8d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63832b5c-37a9-455a-943d-bfa74a292023",
+                            ConcurrencyStamp = "041e97e2-4a67-45f3-a8eb-bda3ac17381f",
                             Email = "admin@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECeO2MEsNvNL1El3EYUghNvSHekx76SpAjT7bnr96X/+IFGsktJif04osbHsxZ16yg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHn/F7NFQWcEzT/b883oUyeKUdPAW/3LWMcXapRPt0ZMUbsuUfAgFGjvBqdY0Xfl9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a03cbec8-32c8-4630-ad5f-517329d0c326",
+                            SecurityStamp = "75f1cb74-2fb9-4be7-8af4-978d311c185d",
                             TwoFactorEnabled = false,
                             UserName = "Admin",
                             cedula = "11111111",
                             direccion = "Direcion Admin",
                             genero = 1,
+                            habilitado = false,
                             nombre = "AlcaBox Admin",
                             primerApellido = "Alca",
                             recibeOfertas = false,
@@ -314,21 +318,22 @@ namespace backend.Migrations
                         },
                         new
                         {
-                            Id = "5ff95fa9-027e-4a4d-b8db-5fc5a18f89c5",
+                            Id = "18709e1f-effc-4fc0-896c-ab4ff6755280",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "47356310-000e-4681-ac3b-227be23e0446",
+                            ConcurrencyStamp = "6e601b2e-a68b-441d-8309-ad6d7d2e9c3b",
                             Email = "billy@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BILLY@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGUepLn9+miK+UYSMlDIoY2f+UGlUiPka0a9sA4xw4X5T+r8goJQuT/D+W5wOqJwAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELDCi8VDsCAa+jO9oeToHUmjlm9TTqqSxjvUEkxQyjm0hTiIcVl0casn3+o67HoKgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2939d8b0-9393-4318-b9ba-03891308b413",
+                            SecurityStamp = "2be25147-6969-45c9-8341-b90b3878e3e7",
                             TwoFactorEnabled = false,
                             UserName = "Billy",
                             cedula = "87654321",
                             direccion = "Direcion Funcionario",
                             genero = 1,
+                            habilitado = false,
                             nombre = "Billy",
                             primerApellido = "H",
                             recibeOfertas = false,
@@ -338,21 +343,22 @@ namespace backend.Migrations
                         },
                         new
                         {
-                            Id = "5fce9bf7-687d-490e-8458-59628d28551c",
+                            Id = "5db01d7b-7886-41c2-8674-ec5d8b790005",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "80b452f1-e830-4850-a040-850b9aafab96",
+                            ConcurrencyStamp = "c985bbce-d8e9-4ae9-9de3-c831bc157fa8",
                             Email = "pablo@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "PABLO@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOdhZk8qafJrNDNFUNcPV02zsD9P0ZBc6q43xXiWkDLe7+ocjTSHvCtGq2aiDEgPMg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC+eeg+sCwAfnFdctguCrfKquOPtVclRDNrCJTSnb70nih9lEgV0TJUudh+8JQVz+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "19f0ea5c-dbef-4fe9-86e3-6a6e15b90fb2",
+                            SecurityStamp = "446102cc-aa41-4119-9cf5-78b274346549",
                             TwoFactorEnabled = false,
                             UserName = "Pablo",
                             cedula = "12345678",
                             direccion = "Direcion Usuario",
                             genero = 1,
+                            habilitado = false,
                             nombre = "Pablo J.",
                             primerApellido = "J",
                             recibeOfertas = true,
@@ -362,21 +368,22 @@ namespace backend.Migrations
                         },
                         new
                         {
-                            Id = "76ece59b-af44-4eb8-92a1-437d17fa7502",
+                            Id = "6bb6d963-66a2-48e6-8b58-afedc10a8996",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f6ff550-d2f9-4826-8ec5-a65b57ea8b06",
+                            ConcurrencyStamp = "99720bb3-520d-4705-a12d-5d98a057525a",
                             Email = "bot@alcabox.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BOT@ALCABOX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN2jmqZCjBHMUBGS5iHT3epbHda1/i4RCLGw15a2qEEUcVlY723vHsU93kzoE1/SGQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIwnXPU50rmvSZ1xLhALWheR2ezABHWD2+F53hVZ0S/9sPRQBVMFf2OO5DDDLlraLA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3443ad55-4c22-42cf-914d-3afb668c02ad",
+                            SecurityStamp = "8a4ff38b-401a-4f6b-8b49-910caee3e2ec",
                             TwoFactorEnabled = false,
                             UserName = "Bot",
                             cedula = "55555555",
                             direccion = "Direcion Bot",
                             genero = 1,
+                            habilitado = false,
                             nombre = "Bot R.",
                             primerApellido = "B",
                             recibeOfertas = false,

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FORM, FORM_OPT } from 'src/app/shared/models/Form.model';
+import { FormService } from 'src/app/shared/services/form.service';
 import { GenericConfirmComponent } from '../generic-confirm/generic-confirm.component';
 import { GenericDetailModalComponent } from '../generic-detail-modal/generic-detail-modal.component';
 import { GenericFormComponent } from '../generic-form/generic-form.component';
@@ -32,7 +33,7 @@ export class GenericTableComponent implements OnInit {
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   bsModalRef?: BsModalRef;
   
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private formService : FormService) { }
 
   ngOnInit(): void {
     this.data.genericDetail.displayCols.push('acciones')
@@ -82,6 +83,7 @@ export class GenericTableComponent implements OnInit {
       } 
     });
     this.bsModalRef.content.confirmed.subscribe((pk : any) => {
+      this.formService.successToast("Paquete Eliminado", 'bottom-start')
       this.deleteConfirmed.emit(pk)
     })
   }

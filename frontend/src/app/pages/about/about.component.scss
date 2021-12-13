@@ -1,0 +1,21 @@
+@import "src/assets/scss/custom";
+
+.about {
+    font-size: toREM(33);
+    text-align: center;
+
+    &__world {
+        margin: toREM(10) auto;
+        width: toREM(559);
+    }
+
+    &__text {
+        margin: 0 auto;
+        width: toREM(899);
+    }
+
+    &__office {
+        margin: toREM(30) auto;
+        width: toREM(563);
+    }
+}

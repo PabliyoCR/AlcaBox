@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IPerfilUsuaio } from '../models/DTOs/authenticationDTOs/IPerfilUsuaio.model';
@@ -16,6 +16,7 @@ import { IAutentificacion } from '../models/DTOs/authenticationDTOs/IAutentifica
 export class UserService {
 
   private readonly keyToken = 'token';
+  private userEmail : string
 
   constructor(private http: HttpClient) {
   }
@@ -69,6 +70,16 @@ export class UserService {
 
   getUsuarios(): Observable<UsuarioDTO[]>{
     return this.http.get<UsuarioDTO[]>(`${environment.urlAPI}/User`);
+  }
+
+  getUserByEmail(): Observable<UsuarioDTO>{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'json',
+      'email' : this.userEmail
+    });
+    console.log(headers);
+    return this.http.get<UsuarioDTO>(`${environment.urlAPI}/User/byEmail`, { headers });
   }
 
   obtenerUsuario(id: string): Observable<UserCreacionDTO> {
@@ -133,9 +144,13 @@ export class UserService {
     let token = localStorage.getItem("token");
 
     let decoded = JSON.parse(JSON.stringify(jwt_decode(token!)));
-    let perfilU : IPerfilUsuaio = decoded;
 
-    console.log(perfilU);
+    console.log(decoded);
+    this.userEmail = decoded.User
+
+    let perfilU : IPerfilUsuaio = decoded;
+    
+    console.log(this.userEmail);
 
     return perfilU
   }

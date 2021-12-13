@@ -10,4 +10,5 @@ export interface FORM_OPT {
     name: string;
     value? : any;
     display?: string;
+    posibleValues? : any[]
 }

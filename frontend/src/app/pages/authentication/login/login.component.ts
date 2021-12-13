@@ -13,12 +13,13 @@ import { AuthenticationResponse } from 'src/app/shared/models/DTOs/authenticatio
 
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup; 
+  loginForm: FormGroup;
+  errorMessage : string;
 
   constructor(private fb : FormBuilder, private UserService : UserService, private router: Router) { 
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -29,14 +30,24 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    if(!this.loginForm.valid){
+      this.errorMessage = "Debes ingresar valores válidos"
+      return
+    }
+
     this.UserService.login(this.loginForm.value).subscribe(
       (res: AuthenticationResponse) => {
+
+        console.log(res);
+        //this.UserService.userID = res.
+
         localStorage.setItem('token', res.message);
         this.UserService.cargarPerfilUsuario();
         this.router.navigateByUrl('');
       },
       err => {
         console.log(err);
+        this.errorMessage = err.error.message
       }
     );
   }

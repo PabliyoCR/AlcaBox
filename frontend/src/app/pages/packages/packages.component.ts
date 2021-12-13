@@ -71,7 +71,7 @@ export class PackagesComponent implements OnInit {
   }
 
   getPaquetes() : void{
-    this.packageService.getPaquetes().subscribe( res => {
+    this.packageService.getPaquetes("FechaRegistro").subscribe( res => {
       this.paquetes = res
       this.dataSource.data = this.paquetes
       this.dataSource.paginator = this.paginator;
@@ -98,6 +98,7 @@ export class PackagesComponent implements OnInit {
     var dialogRef = this.dialog.open(ConfirmComponent, { data: { titulo: "Eliminar Paquete", mensaje : "¿Deseas Eliminar el Paquete?", params : { paqueteId } } });
     dialogRef.componentInstance.procederEvent.subscribe(result => {
       this.packageService.eliminaPaquete(result.paqueteId).subscribe( res => {
+        this.formService.successToast("Paquete Eliminado", 'bottom-start')
         this.getPaquetes()
       })
     })

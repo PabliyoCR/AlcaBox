@@ -1,8 +1,12 @@
 @import "src/assets/scss/custom";
 
+:host{
+    margin-bottom: toREM(12);
+}
+
 .card-info{
-    width: toREM(314);
-    height: toREM(390);
+    width: toREM(285);
+    height: toREM(350);
     -webkit-box-shadow: 0px 4px 10px -2px #707070; 
     box-shadow: 0px 4px 10px -2px #707070;
     border-radius: toREM(45);
@@ -13,7 +17,7 @@
     cursor: pointer;
 
     &__image{
-        height: toREM(236);
+        height: toREM(206);
 
         img{
             height: 100%;
@@ -32,5 +36,9 @@
         align-self: flex-end;
         margin-top: auto;
         padding-right: toREM(40);
+        color: $gray-500;
+        font-weight: $font-weight-light;
+        font-size: toREM(10);
+        margin-bottom: toREM(10);
     }
 }

@@ -115,7 +115,5 @@ namespace backend.Controllers
 
             return BadRequest("Some properties are not valid");
         }
-
-
     }
 }

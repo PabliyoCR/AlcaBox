@@ -88,7 +88,7 @@ export class FormularioPaqueteComponent implements OnInit {
 
     var form = this.paqueteForm.getRawValue();
 
-    var paquete : PaqueteCreacionDTO  = {
+    var paquete : PaqueteCreacionDTO = {
       paqueteId : form.paqueteId,
       tracking : form.tracking,
       arancelId : form.arancel,

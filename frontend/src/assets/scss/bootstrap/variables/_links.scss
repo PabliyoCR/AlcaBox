@@ -2,10 +2,10 @@
 // //
 // // Style anchor elements.
 
-$link-color: $black;
+//$link-color: $black;
 $link-decoration: none;
 $link-shade-percentage: 20%;
-$link-hover-color: shift-color($link-color, $link-shade-percentage);
+$link-hover-color: $tertiary;
 $link-hover-decoration: none;
 
 // // $stretched-link-pseudo-element:           after ;

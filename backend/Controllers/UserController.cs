@@ -38,6 +38,13 @@ namespace backend.Controllers
             return _mapper.Map<List<UsuarioDTO>>(usuarios);
         }
 
+        [HttpGet("byEmail")]    
+        public async Task<ActionResult<UsuarioDTO>> GetUsuario([FromHeader] string email)
+        {
+            var usuario = await _userManager.FindByEmailAsync(email);
+            return _mapper.Map<UsuarioDTO>(usuario);
+        }
+
 
         [HttpGet("byRole/{roleName}")]
         public async Task<ActionResult<IEnumerable<UsuarioDTO>>> getUsersByRole(string roleName)

@@ -1,0 +1,22 @@
+@import "src/assets/scss/custom";
+
+.help {
+
+    &__box {
+        position: absolute;
+        width: toREM(384);
+        height: toREM(348);
+        top: toREM(100);
+        right: toREM(200);
+    }
+
+    &__form {
+        margin: 0 auto;
+        width: toREM(748);
+    }
+
+    &__manual {
+        margin: 0 auto;
+        width: toREM(748);
+    }
+}
